@@ -5,3 +5,7 @@ php:
 
 before_install:
   - composer install
+
+script:
+  - phpunit
+  - php coverage-checker.php clover.xml 75
