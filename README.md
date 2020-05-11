@@ -24,6 +24,17 @@ git clone https://github.com/carlonicora/jsonapi.git
 
 The jsonapi library does not require any configuration.
 
+## Docker
+
+The library comes with a docker environment included. Useful for testing changes and running PHPUnit tests.
+
+```bash
+cd .docker
+docker-compose build
+docker-compose up -d
+docker exec -ti jsonapi composer update
+```
+
 ## Usage
 
 This library is organised around the objects identifiable in the 
