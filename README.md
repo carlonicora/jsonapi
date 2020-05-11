@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.com/carlonicora/jsonapi.svg?branch=master)](https://travis-ci.com/carlonicora/jsonapi)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Coverage Status](https://coveralls.io/repos/github/carlonicora/jsonapi/badge.svg?branch=dev)](https://coveralls.io/github/carlonicora/jsonapi?branch=dev)
 
 jsonapi is a PHP library to manage [{json:api}](https://jsonapi.org) documents. The library also offers the possiblity
 to manage an http response directly from the library.  
