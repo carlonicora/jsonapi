@@ -28,6 +28,7 @@ class resourceObject extends resourceIdentifier implements importInterface
      * @param string|null $id
      * @param array|null $dataImport
      * @param array|null $included
+     * @param meta|null $resourceIdentifierMeta
      * @throws Exception
      */
     public function __construct(?string $type=null, ?string $id = null, ?array $dataImport=null, array $included=null, ?meta $resourceIdentifierMeta=null)
