@@ -35,10 +35,10 @@ class error implements exportPreparationInterface
 
     public function __construct(
         ?string $status=null,
+        ?string $detail=null,
         ?string $id=null,
         ?string $code=null,
-        ?string $title=null,
-        ?string $detail=null)
+        ?string $title=null)
     {
         $this->status = $status;
         $this->id = $id;

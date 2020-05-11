@@ -128,6 +128,50 @@ $array = [
 $document = new document($array);
 ```
 
+### resourceObject
+
+A `resourceObject` is a {json:api} document primary data. The `document` object can contain multiple `resourceObject`.
+
+```php
+use \carlonicora\jsonapi\objects\resourceObject;
+use \carlonicora\jsonapi\objects\link;
+
+$resource = new resourceObject('journal', 'iajhd80');
+
+$resource->attributes->add('title', 'About phlow - the community media movement');
+$resource->links->add(new link('self', 'https://app.phlow.com/@carlo/journals/about-phlow-the-community-media-movement'));
+```
+
+As for the `document`, a `resourceObject` can be populated by passing an array.
+
+```php
+use \carlonicora\jsonapi\objects\resourceObject;
+
+$array = [
+    'type' => 'journal',
+    'id' => 'andsjad897asd',
+    'attributes' => [
+        'title' => 'About phlow - the community media movement'
+    ],
+    'links' => [
+        'self' => 'https://app.phlow.com/@carlo/journals/about-phlow-the-community-media-movement'
+    ]
+];
+
+$resource = new resourceObject(null, null, $array);
+```
+
+A `resourceObject` can contain multiple `relationship`, as defined in the {json:api} documentation.
+
+```php
+use \carlonicora\jsonapi\objects\resourceObject;
+
+$resource = new resourceObject('journal', '1');
+$userResource = new resourceObject('user', '10');
+
+$resource->relationship('author')->resourceLinkage->add($userResource);
+```
+
 ## Versioning
 
 This project use [Semantic Versioning](https://semver.org/) for its tags.
