@@ -15,7 +15,7 @@ before_script:
 # Build Script. Notice: We are demanding unit to generate a clover file to our previously created folder
 script:
   # Syntax: phpunit --coverage-clover <folder>/<name>.xml --text-suffix .php [--colors] [--report-useless-tests] <tests location>.php
-  - phpunit --coverage-clover build/logs/clover.xml --test-suffix .php --colors --report-useless-tests tests/test.php
+  - phpunit --coverage-clover build/logs/clover.xml --test-suffix .php --colors
 
 # After success, run sh to bind coveralls
 after_success:
