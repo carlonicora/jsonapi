@@ -39,6 +39,16 @@ class documentTest extends abstractTestCase
     /**
      * @throws Exception
      */
+    public function testCheckDocumentMinimalWithLinksExport() : void
+    {
+        $document = $this->generateDocumentEmpty();
+        $document->links->add(new link('self', 'https://self'));
+        $this->assertEquals('https://self', $document->prepare()['links']['self']);
+    }
+
+    /**
+     * @throws Exception
+     */
     public function testSuperDuperDocumentPreparation() : void
     {
         $document = new document();
@@ -211,6 +221,9 @@ class documentTest extends abstractTestCase
                         ]
                     ]
                 ]
+            ],
+            'links' => [
+                'self' => 'https://self'
             ],
             'included' => [
                 [

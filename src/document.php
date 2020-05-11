@@ -5,6 +5,7 @@ use carlonicora\jsonapi\interfaces\exportInterface;
 use carlonicora\jsonapi\interfaces\exportPreparationInterface;
 use carlonicora\jsonapi\interfaces\importInterface;
 use carlonicora\jsonapi\objects\error;
+use carlonicora\jsonapi\objects\links;
 use carlonicora\jsonapi\objects\meta;
 use carlonicora\jsonapi\objects\resourceObject;
 use carlonicora\jsonapi\traits\exportPreparationTrait;
@@ -17,6 +18,9 @@ class document implements exportInterface, exportPreparationInterface, importInt
 
     /** @var meta  */
     public meta $meta;
+
+    /** @var links  */
+    public links $links;
 
     /** @var array|resourceObject[]  */
     public array $resources=[];
@@ -38,6 +42,7 @@ class document implements exportInterface, exportPreparationInterface, importInt
     public function __construct(?array $dataImport=null)
     {
         $this->meta = new meta();
+        $this->links = new links();
 
         if ($dataImport !== null){
             $this->importArray($dataImport);
@@ -136,6 +141,8 @@ class document implements exportInterface, exportPreparationInterface, importInt
             $this->prepareMeta($this->meta, $response, true);
         }
 
+        $this->prepareLinks($this->links, $response);
+
         if (count($this->included) > 0) {
             $response['included'] = [];
 
@@ -169,6 +176,10 @@ class document implements exportInterface, exportPreparationInterface, importInt
 
         if (array_key_exists('meta', $data)) {
             $this->meta->importArray($data['meta']);
+        }
+
+        if (array_key_exists('links', $data)) {
+            $this->links->importArray($data['links']);
         }
 
         if (array_key_exists('data', $data)) {
