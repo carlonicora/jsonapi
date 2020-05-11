@@ -102,11 +102,27 @@ class response
             $response = null;
         }
 
-        $GLOBALS['http_response_code'] = $this->httpStatus;
-        header($this->generateProtocol() . ' ' . $this->httpStatus . ' ' . $this->generateStatusText());
-        header('Content-Type: application/vnd.api+json');
+        $this->renderHeaders();
 
         return $response;
+    }
+
+    /**
+     *
+     */
+    public function renderHeaders() : void
+    {
+        $this->renderProtocolHeader();
+        header('Content-Type: application/vnd.api+json');
+    }
+
+    /**
+     *
+     */
+    public function renderProtocolHeader() : void
+    {
+        $GLOBALS['http_response_code'] = $this->httpStatus;
+        header($this->generateProtocol() . ' ' . $this->httpStatus . ' ' . $this->generateStatusText());
     }
 
     /**
