@@ -163,4 +163,96 @@ class documentTest extends abstractTestCase
         $document = new document($array);
         $document->forceResourceList();
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testArrayImport() : void
+    {
+        $array = [
+            'data' => [
+                'type' => 'journal',
+                'id' => 'andsjad897asd',
+                'attributes' => [
+                    'title' => 'About phlow - the community media movement'
+                ],
+                'links' => [
+                    'self' => 'https://app.phlow.com/@carlo/journals/about-phlow-the-community-media-movement'
+                ],
+                'relationships' => [
+                    'author' => [
+                        'links' => [
+                            'related' => 'https://app.phlow.com/@carlo'
+                        ],
+                        'data' => [
+                            'type' => 'user',
+                            'id' => 'adslau79ulaksdu',
+                            'meta' => [
+                                'isPrimaryAuthor' => true
+                            ]
+                        ]
+                    ],
+                    'images' => [
+                        'data' => [
+                            [
+                                'type' => 'image',
+                                'id' => '26037dd7-481b-4110-97f3-a879a08d1e20',
+                                'meta' => [
+                                    'isCover' => true
+                                ]
+                            ],
+                            [
+                                'type' => 'image',
+                                'id' => '2563cc0c-3202-4554-be70-3c9850d5369e',
+                                'meta' => [
+                                    'isCover' => false
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'included' => [
+                [
+                    'type' => 'user',
+                    'id' => 'adslau79ulaksdu',
+                    'attributes' => [
+                        'name' => 'Carlo Nicora',
+                        'username' => 'carlo',
+                        'url' => 'https://carlonicora.com'
+                    ],
+                    'meta' => [
+                        'hasJournals' => true,
+                        'hasPhotos' => true
+                    ],
+                    'links' => [
+                        'self' => 'https://app.phlow.com/@carlo'
+                    ]
+                ],
+                [
+                    'type' => 'image',
+                    'id' => '26037dd7-481b-4110-97f3-a879a08d1e20',
+                    'attributes' => [
+                        'url' => 'https://acc-phlow.imgix.net/wZaN92gl7WlRmDWrKp/26037dd7-481b-4110-97f3-a879a08d1e20.jpg?w=750&ixlib=js-1.1.0&s=28c961bf9a05855320fe853155b1cd7f'
+                    ],
+                    'links' => [
+                        'self' => 'https://acc-phlow.imgix.net/wZaN92gl7WlRmDWrKp/26037dd7-481b-4110-97f3-a879a08d1e20.jpg?w=750&ixlib=js-1.1.0&s=28c961bf9a05855320fe853155b1cd7f'
+                    ]
+                ],
+                [
+                    'type' => 'image',
+                    'id' => '2563cc0c-3202-4554-be70-3c9850d5369e',
+                    'attributes' => [
+                        'url' => 'https://acc-phlow.imgix.net/wZaN92gl7WlRmDWrKp/2563cc0c-3202-4554-be70-3c9850d5369e.jpg?w=750&ixlib=js-1.1.0&s=da188c73f2b571d1afd9b1625f482e05'
+                    ],
+                    'links' => [
+                        'self' => 'https://acc-phlow.imgix.net/wZaN92gl7WlRmDWrKp/2563cc0c-3202-4554-be70-3c9850d5369e.jpg?w=750&ixlib=js-1.1.0&s=da188c73f2b571d1afd9b1625f482e05'
+                    ]
+                ]
+            ]
+        ];
+
+        $document = new document($array);
+        $this->assertEquals($array, $document->prepare());
+    }
 }

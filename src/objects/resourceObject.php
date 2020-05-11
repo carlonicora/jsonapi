@@ -16,6 +16,9 @@ class resourceObject extends resourceIdentifier implements importInterface
     /** @var links  */
     public links $links;
 
+    /** @var meta  */
+    public meta $meta;
+
     /** @var array|relationship[] */
     public array $relationships=[];
 
@@ -27,21 +30,25 @@ class resourceObject extends resourceIdentifier implements importInterface
      * @param array|null $included
      * @throws Exception
      */
-    public function __construct(?string $type=null, ?string $id = null, ?array $dataImport=null, array $included=null)
+    public function __construct(?string $type=null, ?string $id = null, ?array $dataImport=null, array $included=null, ?meta $resourceIdentifierMeta=null)
     {
         $this->attributes = new attributes();
         $this->links = new links();
+        $this->meta = new meta();
+        $this->resourceIdentifierMeta = new meta();
 
         if ($type === null && $dataImport === null){
             throw new RuntimeException('Either type or the import data should be set', 1);
         }
 
         if ($dataImport !== null) {
-            $this->meta = new meta();
-
             $this->importArray($dataImport, $included);
         } else {
             parent::__construct($type, $id);
+        }
+
+        if ($resourceIdentifierMeta !== null){
+            $this->resourceIdentifierMeta = $resourceIdentifierMeta;
         }
     }
 
@@ -73,8 +80,13 @@ class resourceObject extends resourceIdentifier implements importInterface
     {
         $response = parent::prepare();
 
+        if (array_key_exists('meta', $response)){
+            unset($response['meta']);
+        }
+
         $response['attributes'] = $this->attributes->prepare();
 
+        $this->prepareMeta($this->meta, $response);
         $this->prepareLinks($this->links, $response);
 
         if (count($this->relationships) > 0) {

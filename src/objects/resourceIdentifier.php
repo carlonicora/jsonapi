@@ -9,7 +9,7 @@ class resourceIdentifier implements exportPreparationInterface
     use exportPreparationTrait;
 
     /** @var meta  */
-    public meta $meta;
+    public meta $resourceIdentifierMeta;
 
     /** @var string  */
     public string $type;
@@ -27,7 +27,7 @@ class resourceIdentifier implements exportPreparationInterface
         $this->type = $type;
         $this->id = $id;
 
-        $this->meta = new meta();
+        $this->resourceIdentifierMeta = new meta();
     }
 
     /**
@@ -43,7 +43,7 @@ class resourceIdentifier implements exportPreparationInterface
             $response['id'] = $this->id;
         }
 
-        $this->prepareMeta($this->meta, $response);
+        $this->prepareMeta($this->resourceIdentifierMeta, $response);
 
         return $response;
     }

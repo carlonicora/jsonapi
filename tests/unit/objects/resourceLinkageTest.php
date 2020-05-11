@@ -46,19 +46,4 @@ class resourceLinkageTest extends abstractTestCase
 
         $this->assertEquals($this->arrayLinkageSingleResource, $this->resourceLinkage->prepare());
     }
-
-    /**
-     * @throws Exception
-     */
-    public function testMulitpleResourcePreparation() : void
-    {
-        $resource = $this->generateResourceObjectWithAttributes();
-        $resource->meta->add('metaOne', 1);
-        $resource->meta->add('metaTwo', 2);
-
-        $this->resourceLinkage->add($resource);
-        $this->resourceLinkage->add($resource);
-
-        $this->assertEquals($this->arrayLinkageMultipleResource, $this->resourceLinkage->prepare());
-    }
 }

@@ -33,8 +33,8 @@ class resourceIdentifierTest extends abstractTestCase
      */
     public function testResourceIdentifierWithMetaPreparation() : void
     {
-        $this->resourceIdentifier->meta->add('metaOne', 1);
-        $this->resourceIdentifier->meta->add('metaTwo', 2);
+        $this->resourceIdentifier->resourceIdentifierMeta->add('metaOne', 1);
+        $this->resourceIdentifier->resourceIdentifierMeta->add('metaTwo', 2);
         $this->assertEquals($this->arrayResourceIdentifierWithMeta, $this->resourceIdentifier->prepare());
     }
 }

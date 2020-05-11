@@ -62,11 +62,21 @@ class relationship implements exportPreparationInterface, importInterface
         if (array_key_exists('data', $data)){
             if (array_key_exists('type', $data['data'])){
                 $objectArray = $this->getResourceFromIncludedArray($data['data']['type'], $data['data']['id'], $included);
-                $this->resourceLinkage->add(new resourceObject(null, null, $objectArray, $included));
+                $resourceIdentifierMeta = null;
+                if (array_key_exists('meta', $data['data'])){
+                    $resourceIdentifierMeta = new meta();
+                    $resourceIdentifierMeta->importArray($data['data']['meta']);
+                }
+                $this->resourceLinkage->add(new resourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
             } else {
                 foreach ($data['data'] as $objectArray){
+                    $resourceIdentifierMeta = null;
+                    if (array_key_exists('meta', $objectArray)){
+                        $resourceIdentifierMeta = new meta();
+                        $resourceIdentifierMeta->importArray($objectArray['meta']);
+                    }
                     $objectArray = $this->getResourceFromIncludedArray($objectArray['type'], $objectArray['id'], $included);
-                    $this->resourceLinkage->add(new resourceObject(null, null, $objectArray, $included));
+                    $this->resourceLinkage->add(new resourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
                 }
             }
         }
