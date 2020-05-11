@@ -147,7 +147,7 @@ class response
         } catch (JsonException $e) {
             $this->httpStatus = self::HTTP_STATUS_500;
             $this->document = new document();
-            $this->document->addError( new error(self::HTTP_STATUS_500, null, null, $this->generateStatusText(), 'Failure in converting data to JSON'));
+            $this->document->addError( new error(self::HTTP_STATUS_500, 'Failure in converting data to JSON', null, null, $this->generateStatusText()));
 
             return $this->document->export();
         }
