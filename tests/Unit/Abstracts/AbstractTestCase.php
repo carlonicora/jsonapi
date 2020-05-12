@@ -11,7 +11,6 @@ use CarloNicora\JsonApi\Objects\Relationship;
 use CarloNicora\JsonApi\Objects\ResourceLinkage;
 use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\JsonApi\Objects\ResourceIdentifier;
-use CarloNicora\JsonApi\Response;
 use CarloNicora\JsonApi\tests\Unit\Traits\ArrayDeclarationTrait;
 use CarloNicora\JsonApi\tests\Unit\Traits\JsonDeclarationTrait;
 use Exception;
@@ -92,17 +91,6 @@ class AbstractTestCase extends TestCase
     protected function generateEmptyAttributes() : Attributes
     {
         return new Attributes();
-    }
-
-    protected function generateResponse(?string $status=null) : Response
-    {
-        $response = new Response();
-
-        if ($status !== null) {
-            $response->httpStatus = $status;
-        }
-
-        return $response;
     }
 
     /**

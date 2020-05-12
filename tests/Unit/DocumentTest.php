@@ -2,7 +2,7 @@
 namespace CarloNicora\JsonApi\tests\Unit;
 
 use CarloNicora\JsonApi\Document;
-use CarloNicora\JsonApi\Interfaces\ExportInterface;
+use CarloNicora\JsonApi\Objects\Error;
 use CarloNicora\JsonApi\Objects\Link;
 use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
@@ -11,13 +11,6 @@ use JsonException;
 
 class DocumentTest extends AbstractTestCase
 {
-    public function testDocumentCreation() : void
-    {
-        $document = $this->generateDocumentEmpty();
-
-        $this->assertInstanceOf(ExportInterface::class, $document);
-    }
-
     public function testCheckDocumentMinimalRequirementsMeta() : void
     {
         $document = $this->generateDocumentEmpty();
@@ -32,6 +25,14 @@ class DocumentTest extends AbstractTestCase
     {
         $document = $this->generateDocumentEmpty();
         $this->assertEquals($this->jsonDocumentMinimal, $document->export());
+    }
+
+    public function testDocumentErrorExport() : void
+    {
+        $document = $this->generateDocumentEmpty();
+        $document->addError( new Error('500', 'Generic Error'));
+
+        $this->assertEquals(['errors' => [['status' => '500', 'detail' => 'Generic Error']]], $document->prepare());
     }
 
     /**

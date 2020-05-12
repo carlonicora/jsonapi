@@ -1,7 +1,6 @@
 <?php
 namespace CarloNicora\JsonApi;
 
-use CarloNicora\JsonApi\Interfaces\ExportInterface;
 use CarloNicora\JsonApi\Interfaces\ImportInterface;
 use CarloNicora\JsonApi\Objects\error;
 use CarloNicora\JsonApi\Objects\Links;
@@ -11,7 +10,7 @@ use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
 use Exception;
 use JsonException;
 
-class Document implements ExportInterface, ImportInterface
+class Document implements ImportInterface
 {
     use ExportPreparationTrait;
 
@@ -153,12 +152,14 @@ class Document implements ExportInterface, ImportInterface
     }
 
     /**
+     * @param array|null $includedResourceTypes
+     * @param array|null $requiredFields
      * @return string
      * @throws JsonException
      */
-    public function export(): string
+    public function export(?array $includedResourceTypes=null, ?array $requiredFields=null): string
     {
-        return json_encode($this->prepare(), JSON_THROW_ON_ERROR);
+        return json_encode($this->prepare($includedResourceTypes, $requiredFields), JSON_THROW_ON_ERROR);
     }
 
     /**
