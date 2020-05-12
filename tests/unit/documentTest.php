@@ -1,23 +1,23 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit;
+namespace CarloNicora\JsonApi\tests\Unit;
 
-use carlonicora\jsonapi\document;
-use carlonicora\jsonapi\interfaces\exportInterface;
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\objects\link;
-use carlonicora\jsonapi\objects\resourceObject;
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\Document;
+use CarloNicora\JsonApi\Interfaces\ExportInterface;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Objects\Link;
+use CarloNicora\JsonApi\Objects\ResourceObject;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 use JsonException;
 
-class documentTest extends abstractTestCase
+class DocumentTest extends AbstractTestCase
 {
     public function testDocumentCreation() : void
     {
         $document = $this->generateDocumentEmpty();
 
-        $this->assertInstanceOf(exportInterface::class, $document);
-        $this->assertInstanceOf(exportPreparationInterface::class, $document);
+        $this->assertInstanceOf(ExportInterface::class, $document);
+        $this->assertInstanceOf(ExportPreparationInterface::class, $document);
     }
 
     public function testCheckDocumentMinimalRequirementsMeta() : void
@@ -42,8 +42,8 @@ class documentTest extends abstractTestCase
     public function testCheckDocumentMinimalWithLinksExport() : void
     {
         $document = $this->generateDocumentEmpty();
-        $document->links->add(new link('self', 'https://self'));
-        $this->assertEquals('https://self', $document->prepare()['links']['self']);
+        $document->links->add(new Link('self', 'https://self'));
+        $this->assertEquals('https://self', $document->prepare()['Links']['self']);
     }
 
     /**
@@ -51,27 +51,27 @@ class documentTest extends abstractTestCase
      */
     public function testSuperDuperDocumentPreparation() : void
     {
-        $document = new document();
+        $document = new Document();
 
-        $article = new resourceObject('article', '1');
+        $article = new ResourceObject('article', '1');
         $article->attributes->add('title', 'title');
-        $article->links->add(new link('self', 'https://article/1'));
+        $article->links->add(new Link('self', 'https://article/1'));
 
-        $author = new resourceObject('user', '10');
+        $author = new ResourceObject('user', '10');
         $author->attributes->add('name', 'Carlo');
-        $author->links->add(new link('self', 'https://user/10'));
+        $author->links->add(new Link('self', 'https://user/10'));
 
-        $image101 = new resourceObject('image', '101');
+        $image101 = new ResourceObject('image', '101');
         $image101->attributes->add('url', 'https://image/101.jpg');
-        $image101->links->add(new link('self', 'https://image/101'));
+        $image101->links->add(new Link('self', 'https://image/101'));
 
-        $image102 = new resourceObject('image', '102');
+        $image102 = new ResourceObject('image', '102');
         $image102->attributes->add('url', 'https://image/102.jpg');
-        $image102->links->add(new link('self', 'https://image/102'));
+        $image102->links->add(new Link('self', 'https://image/102'));
 
-        $image103 = new resourceObject('image', '103');
+        $image103 = new ResourceObject('image', '103');
         $image103->attributes->add('url', 'https://image/103.jpg');
-        $image103->links->add(new link('self', 'https://image/103'));
+        $image103->links->add(new Link('self', 'https://image/103'));
 
         $author->relationship('images')->resourceLinkage->add($image103);
         $article->relationship('author')->resourceLinkage->add($author);
@@ -88,28 +88,28 @@ class documentTest extends abstractTestCase
      */
     public function testSuperDuperDocumentPreparationWithForcedList() : void
     {
-        $document = new document();
+        $document = new Document();
         $document->forceResourceList();
 
-        $article = new resourceObject('article', '1');
+        $article = new ResourceObject('article', '1');
         $article->attributes->add('title', 'title');
-        $article->links->add(new link('self', 'https://article/1'));
+        $article->links->add(new Link('self', 'https://article/1'));
 
-        $author = new resourceObject('user', '10');
+        $author = new ResourceObject('user', '10');
         $author->attributes->add('name', 'Carlo');
-        $author->links->add(new link('self', 'https://user/10'));
+        $author->links->add(new Link('self', 'https://user/10'));
 
-        $image101 = new resourceObject('image', '101');
+        $image101 = new ResourceObject('image', '101');
         $image101->attributes->add('url', 'https://image/101.jpg');
-        $image101->links->add(new link('self', 'https://image/101'));
+        $image101->links->add(new Link('self', 'https://image/101'));
 
-        $image102 = new resourceObject('image', '102');
+        $image102 = new ResourceObject('image', '102');
         $image102->attributes->add('url', 'https://image/102.jpg');
-        $image102->links->add(new link('self', 'https://image/102'));
+        $image102->links->add(new Link('self', 'https://image/102'));
 
-        $image103 = new resourceObject('image', '103');
+        $image103 = new ResourceObject('image', '103');
         $image103->attributes->add('url', 'https://image/103.jpg');
-        $image103->links->add(new link('self', 'https://image/103'));
+        $image103->links->add(new Link('self', 'https://image/103'));
 
         $image101->relationship('images')->resourceLinkage->add($image103);
         $author->relationship('images')->resourceLinkage->add($image103);
@@ -127,7 +127,7 @@ class documentTest extends abstractTestCase
      */
     public function testImportingData() : void
     {
-        $document = new document($this->arrayDocumentSuperDuperWithForcedList);
+        $document = new Document($this->arrayDocumentSuperDuperWithForcedList);
 
         $document->forceResourceList();
 
@@ -139,7 +139,7 @@ class documentTest extends abstractTestCase
      */
     public function testImportingDataSingleEntity() : void
     {
-        $document = new document($this->arrayDocumentSuperDuperWithForcedListSingleEntity);
+        $document = new Document($this->arrayDocumentSuperDuperWithForcedListSingleEntity);
 
         $this->assertEquals($this->arrayDocumentSuperDuperWithForcedListSingleEntity, $document->prepare());
     }
@@ -150,12 +150,12 @@ class documentTest extends abstractTestCase
     public function testImportingDataWithMeta() : void
     {
         $array = $this->arrayDocumentSuperDuperWithForcedList;
-        $array['meta'] = [
+        $array['Meta'] = [
            'metaOne' => 1,
            'metaTwo' => 2
         ];
 
-        $document = new document($array);
+        $document = new Document($array);
 
         $document->forceResourceList();
 
@@ -170,7 +170,7 @@ class documentTest extends abstractTestCase
         $this->expectExceptionCode(1);
         $array = $this->arrayDocumentSuperDuperWithForcedList;
         $array['included'] = [];
-        $document = new document($array);
+        $document = new Document($array);
         $document->forceResourceList();
     }
 
@@ -186,18 +186,18 @@ class documentTest extends abstractTestCase
                 'attributes' => [
                     'title' => 'About phlow - the community media movement'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://app.phlow.com/@carlo/journals/about-phlow-the-community-media-movement'
                 ],
                 'relationships' => [
                     'author' => [
-                        'links' => [
+                        'Links' => [
                             'related' => 'https://app.phlow.com/@carlo'
                         ],
                         'data' => [
                             'type' => 'user',
                             'id' => 'adslau79ulaksdu',
-                            'meta' => [
+                            'Meta' => [
                                 'isPrimaryAuthor' => true
                             ]
                         ]
@@ -207,14 +207,14 @@ class documentTest extends abstractTestCase
                             [
                                 'type' => 'image',
                                 'id' => '26037dd7-481b-4110-97f3-a879a08d1e20',
-                                'meta' => [
+                                'Meta' => [
                                     'isCover' => true
                                 ]
                             ],
                             [
                                 'type' => 'image',
                                 'id' => '2563cc0c-3202-4554-be70-3c9850d5369e',
-                                'meta' => [
+                                'Meta' => [
                                     'isCover' => false
                                 ]
                             ]
@@ -222,7 +222,7 @@ class documentTest extends abstractTestCase
                     ]
                 ]
             ],
-            'links' => [
+            'Links' => [
                 'self' => 'https://self'
             ],
             'included' => [
@@ -232,13 +232,13 @@ class documentTest extends abstractTestCase
                     'attributes' => [
                         'name' => 'Carlo Nicora',
                         'username' => 'carlo',
-                        'url' => 'https://carlonicora.com'
+                        'url' => 'https://CarloNicora.com'
                     ],
-                    'meta' => [
+                    'Meta' => [
                         'hasJournals' => true,
                         'hasPhotos' => true
                     ],
-                    'links' => [
+                    'Links' => [
                         'self' => 'https://app.phlow.com/@carlo'
                     ]
                 ],
@@ -248,7 +248,7 @@ class documentTest extends abstractTestCase
                     'attributes' => [
                         'url' => 'https://acc-phlow.imgix.net/wZaN92gl7WlRmDWrKp/26037dd7-481b-4110-97f3-a879a08d1e20.jpg?w=750&ixlib=js-1.1.0&s=28c961bf9a05855320fe853155b1cd7f'
                     ],
-                    'links' => [
+                    'Links' => [
                         'self' => 'https://acc-phlow.imgix.net/wZaN92gl7WlRmDWrKp/26037dd7-481b-4110-97f3-a879a08d1e20.jpg?w=750&ixlib=js-1.1.0&s=28c961bf9a05855320fe853155b1cd7f'
                     ]
                 ],
@@ -258,14 +258,14 @@ class documentTest extends abstractTestCase
                     'attributes' => [
                         'url' => 'https://acc-phlow.imgix.net/wZaN92gl7WlRmDWrKp/2563cc0c-3202-4554-be70-3c9850d5369e.jpg?w=750&ixlib=js-1.1.0&s=da188c73f2b571d1afd9b1625f482e05'
                     ],
-                    'links' => [
+                    'Links' => [
                         'self' => 'https://acc-phlow.imgix.net/wZaN92gl7WlRmDWrKp/2563cc0c-3202-4554-be70-3c9850d5369e.jpg?w=750&ixlib=js-1.1.0&s=da188c73f2b571d1afd9b1625f482e05'
                     ]
                 ]
             ]
         ];
 
-        $document = new document($array);
+        $document = new Document($array);
         $this->assertEquals($array, $document->prepare());
     }
 }

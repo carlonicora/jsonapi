@@ -1,32 +1,32 @@
 <?php
-namespace carlonicora\jsonapi\objects;
+namespace CarloNicora\JsonApi\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\interfaces\importInterface;
-use carlonicora\jsonapi\traits\exportPreparationTrait;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Interfaces\ImportInterface;
+use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
 use Exception;
 
-class relationship implements exportPreparationInterface, importInterface
+class Relationship implements ExportPreparationInterface, ImportInterface
 {
-    use exportPreparationTrait;
+    use ExportPreparationTrait;
 
-    /** @var meta  */
-    public meta $meta;
+    /** @var Meta  */
+    public Meta $meta;
 
-    /** @var links  */
-    public links $links;
+    /** @var Links  */
+    public Links $links;
 
-    /** @var resourceLinkage  */
-    public resourceLinkage $resourceLinkage;
+    /** @var ResourceLinkage  */
+    public ResourceLinkage $resourceLinkage;
 
     /**
-     * relationship constructor.
+     * Relationship constructor.
      */
     public function __construct()
     {
-        $this->meta = new meta();
-        $this->links = new links();
-        $this->resourceLinkage = new resourceLinkage();
+        $this->meta = new Meta();
+        $this->links = new Links();
+        $this->resourceLinkage = new ResourceLinkage();
     }
 
     /**
@@ -51,32 +51,32 @@ class relationship implements exportPreparationInterface, importInterface
      */
     public function importArray(array $data, array $included=null): void
     {
-        if (array_key_exists('meta', $data)) {
-            $this->meta->importArray($data['meta']);
+        if (array_key_exists('Meta', $data)) {
+            $this->meta->importArray($data['Meta']);
         }
 
-        if (array_key_exists('links', $data)) {
-            $this->links->importArray($data['links']);
+        if (array_key_exists('Links', $data)) {
+            $this->links->importArray($data['Links']);
         }
 
         if (array_key_exists('data', $data)){
             if (array_key_exists('type', $data['data'])){
                 $objectArray = $this->getResourceFromIncludedArray($data['data']['type'], $data['data']['id'], $included);
                 $resourceIdentifierMeta = null;
-                if (array_key_exists('meta', $data['data'])){
-                    $resourceIdentifierMeta = new meta();
-                    $resourceIdentifierMeta->importArray($data['data']['meta']);
+                if (array_key_exists('Meta', $data['data'])){
+                    $resourceIdentifierMeta = new Meta();
+                    $resourceIdentifierMeta->importArray($data['data']['Meta']);
                 }
-                $this->resourceLinkage->add(new resourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
+                $this->resourceLinkage->add(new ResourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
             } else {
                 foreach ($data['data'] as $objectArray){
                     $resourceIdentifierMeta = null;
-                    if (array_key_exists('meta', $objectArray)){
-                        $resourceIdentifierMeta = new meta();
-                        $resourceIdentifierMeta->importArray($objectArray['meta']);
+                    if (array_key_exists('Meta', $objectArray)){
+                        $resourceIdentifierMeta = new Meta();
+                        $resourceIdentifierMeta->importArray($objectArray['Meta']);
                     }
                     $objectArray = $this->getResourceFromIncludedArray($objectArray['type'], $objectArray['id'], $included);
-                    $this->resourceLinkage->add(new resourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
+                    $this->resourceLinkage->add(new ResourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
                 }
             }
         }

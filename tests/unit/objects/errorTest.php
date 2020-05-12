@@ -1,15 +1,15 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\objects\error;
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Objects\Error;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 
-class errorTest extends abstractTestCase
+class ErrorTest extends AbstractTestCase
 {
-    /** @var error */
-    private error $error;
+    /** @var Error */
+    private Error $error;
 
     public function setUp(): void
     {
@@ -20,7 +20,7 @@ class errorTest extends abstractTestCase
 
     public function testErrorInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(exportPreparationInterface::class, $this->error);
+        $this->assertInstanceOf(ExportPreparationInterface::class, $this->error);
     }
 
     public function testErrorPreparation() : void

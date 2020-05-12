@@ -1,10 +1,10 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\traits;
+namespace CarloNicora\JsonApi\tests\Unit\Traits;
 
-trait jsonDeclarationTrait
+trait JsonDeclarationTrait
 {
     /** @var string  */
-    protected string $jsonDocumentMinimal = '{"meta":[]}';
+    protected string $jsonDocumentMinimal = '{"Meta":[]}';
 
     protected string $jsonResponseError = '{"errors":[{"status":"500","title":"Internal Server Error","detail":"Failure in converting data to JSON"}]}';
 }

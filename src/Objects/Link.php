@@ -1,9 +1,9 @@
 <?php
-namespace carlonicora\jsonapi\objects;
+namespace CarloNicora\JsonApi\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 
-class link implements exportPreparationInterface
+class Link implements ExportPreparationInterface
 {
     /** @var string  */
     public string $name;
@@ -11,16 +11,16 @@ class link implements exportPreparationInterface
     /** @var string  */
     public string $href;
 
-    /** @var meta|null  */
-    public ?meta $meta=null;
+    /** @var Meta|null  */
+    public ?Meta $meta=null;
 
     /**
-     * link constructor.
+     * Link constructor.
      * @param string $name
      * @param string $href
-     * @param meta|null $meta
+     * @param Meta|null $meta
      */
-    public function __construct(string $name, string $href, ?meta $meta=null)
+    public function __construct(string $name, string $href, ?Meta $meta=null)
     {
         $this->name = $name;
         $this->href = $href;
@@ -42,7 +42,7 @@ class link implements exportPreparationInterface
         } else {
             $response[$this->name] = [];
             $response[$this->name]['href'] = $this->href;
-            $response[$this->name]['meta'] = $this->meta->prepare();
+            $response[$this->name]['Meta'] = $this->meta->prepare();
         }
 
         return $response;

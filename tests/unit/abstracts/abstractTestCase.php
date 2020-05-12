@@ -1,60 +1,60 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\abstracts;
+namespace CarloNicora\JsonApi\tests\Unit\Abstracts;
 
-use carlonicora\jsonapi\document;
-use carlonicora\jsonapi\objects\attributes;
-use carlonicora\jsonapi\objects\error;
-use carlonicora\jsonapi\objects\link;
-use carlonicora\jsonapi\objects\links;
-use carlonicora\jsonapi\objects\meta;
-use carlonicora\jsonapi\objects\relationship;
-use carlonicora\jsonapi\objects\resourceLinkage;
-use carlonicora\jsonapi\objects\resourceObject;
-use carlonicora\jsonapi\objects\resourceIdentifier;
-use carlonicora\jsonapi\response;
-use carlonicora\jsonapi\tests\unit\traits\arrayDeclarationTrait;
-use carlonicora\jsonapi\tests\unit\traits\jsonDeclarationTrait;
+use CarloNicora\JsonApi\Document;
+use CarloNicora\JsonApi\Objects\Attributes;
+use CarloNicora\JsonApi\Objects\Error;
+use CarloNicora\JsonApi\Objects\Link;
+use CarloNicora\JsonApi\Objects\Links;
+use CarloNicora\JsonApi\Objects\Meta;
+use CarloNicora\JsonApi\Objects\Relationship;
+use CarloNicora\JsonApi\Objects\ResourceLinkage;
+use CarloNicora\JsonApi\Objects\ResourceObject;
+use CarloNicora\JsonApi\Objects\ResourceIdentifier;
+use CarloNicora\JsonApi\Response;
+use CarloNicora\JsonApi\tests\Unit\traits\arrayDeclarationTrait;
+use CarloNicora\JsonApi\tests\Unit\traits\jsonDeclarationTrait;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
 
-class abstractTestCase extends TestCase
+class AbstractTestCase extends TestCase
 {
     use arrayDeclarationTrait;
     use jsonDeclarationTrait;
 
-    protected function generateResourceIdentifier() : resourceIdentifier
+    protected function generateResourceIdentifier() : ResourceIdentifier
     {
-        return new resourceIdentifier('user', '1');
+        return new ResourceIdentifier('user', '1');
     }
 
-    protected function generateResourceObject() : resourceObject
+    protected function generateResourceObject() : ResourceObject
     {
-        return new resourceObject('user', '1');
+        return new ResourceObject('user', '1');
     }
 
-    protected function generateRelationship() : relationship
+    protected function generateRelationship() : Relationship
     {
-        return new relationship();
+        return new Relationship();
     }
 
     /**
-     * @return resourceObject
+     * @return ResourceObject
      * @throws Exception
      */
-    protected function generateResourceObjectWithAttributes() : resourceObject
+    protected function generateResourceObjectWithAttributes() : ResourceObject
     {
-        $response = new resourceObject('user', '1');
+        $response = new ResourceObject('user', '1');
         $response->attributes = $this->generateAttributes();
         return $response;
     }
 
     /**
-     * @return resourceObject
+     * @return ResourceObject
      * @throws Exception
      */
-    protected function generateCompleteResourceObject() : resourceObject
+    protected function generateCompleteResourceObject() : ResourceObject
     {
         $response = $this->generateResourceObjectWithAttributes();
         $response->links->add($this->generateLink());
@@ -65,38 +65,38 @@ class abstractTestCase extends TestCase
     }
 
     /**
-     * @return resourceObject
+     * @return ResourceObject
      * @throws Exception
      */
-    protected function generateSecondaryResourceObject() : resourceObject
+    protected function generateSecondaryResourceObject() : ResourceObject
     {
-        $response = new resourceObject('image', '10');
+        $response = new ResourceObject('image', '10');
         $response->attributes->add('url', 'https://image/10.jpg');
-        $response->links->add(new link('self', 'https://image/10'));
+        $response->links->add(new Link('self', 'https://image/10'));
 
         return $response;
     }
 
     /**
-     * @return attributes
+     * @return Attributes
      * @throws Exception
      */
-    protected function generateAttributes() : attributes
+    protected function generateAttributes() : Attributes
     {
-        $response = new attributes();
+        $response = new Attributes();
         $response->add('name', 'Carlo');
 
         return $response;
     }
 
-    protected function generateEmptyAttributes() : attributes
+    protected function generateEmptyAttributes() : Attributes
     {
-        return new attributes();
+        return new Attributes();
     }
 
-    protected function generateResponse(?string $status=null) : response
+    protected function generateResponse(?string $status=null) : Response
     {
-        $response = new response();
+        $response = new Response();
 
         if ($status !== null) {
             $response->httpStatus = $status;
@@ -106,26 +106,26 @@ class abstractTestCase extends TestCase
     }
 
     /**
-     * @return document
+     * @return Document
      */
-    protected function generateDocumentEmpty() : document
+    protected function generateDocumentEmpty() : Document
     {
-        return new document();
+        return new Document();
     }
 
     /**
-     * @return meta
+     * @return Meta
      */
-    protected function generateEmptyMeta() : meta
+    protected function generateEmptyMeta() : Meta
     {
-        return new meta();
+        return new Meta();
     }
 
     /**
-     * @return meta
+     * @return Meta
      * @throws Exception
      */
-    protected function generateMeta() : meta
+    protected function generateMeta() : Meta
     {
         $meta = $this->generateEmptyMeta();
         $meta->add('metaOne', 1);
@@ -133,46 +133,46 @@ class abstractTestCase extends TestCase
         return $meta;
     }
 
-    protected function generateLink() : link
+    protected function generateLink() : Link
     {
-        return new link('self', 'https://self');
+        return new Link('self', 'https://self');
     }
 
-    protected function generateRelatedLink() : link
+    protected function generateRelatedLink() : Link
     {
-        return new link('related', 'https://related');
+        return new Link('related', 'https://related');
     }
 
     /**
-     * @return link
+     * @return Link
      * @throws Exception
      */
-    protected function generateLinkWithMeta() : link
+    protected function generateLinkWithMeta() : Link
     {
-        return new link('self', 'https://self', $this->generateMeta());
+        return new Link('self', 'https://self', $this->generateMeta());
     }
 
-    protected function generateEmptyLinks() : links
+    protected function generateEmptyLinks() : Links
     {
-        return new links();
+        return new Links();
     }
 
-    protected function generateMinimalError() : error
+    protected function generateMinimalError() : Error
     {
-        return new error();
+        return new Error();
     }
 
-    protected function generateError() : error
+    protected function generateError() : Error
     {
-        return new error('status', 'detail', 'id', 'code', 'title');
+        return new Error('status', 'detail', 'id', 'code', 'title');
     }
 
     /**
-     * @return resourceLinkage
+     * @return ResourceLinkage
      */
-    protected function generateResourceLinkage() : resourceLinkage
+    protected function generateResourceLinkage() : ResourceLinkage
     {
-        return new resourceLinkage();
+        return new ResourceLinkage();
     }
 
     protected function invokeMethod($object, $methodName, array $parameters = [])

@@ -1,31 +1,31 @@
 <?php
-namespace carlonicora\jsonapi;
+namespace CarloNicora\JsonApi;
 
-use carlonicora\jsonapi\interfaces\exportInterface;
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\interfaces\importInterface;
-use carlonicora\jsonapi\objects\error;
-use carlonicora\jsonapi\objects\links;
-use carlonicora\jsonapi\objects\meta;
-use carlonicora\jsonapi\objects\resourceObject;
-use carlonicora\jsonapi\traits\exportPreparationTrait;
+use CarloNicora\JsonApi\Interfaces\ExportInterface;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Interfaces\ImportInterface;
+use CarloNicora\JsonApi\Objects\error;
+use CarloNicora\JsonApi\Objects\Links;
+use CarloNicora\JsonApi\Objects\Meta;
+use CarloNicora\JsonApi\Objects\ResourceObject;
+use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
 use Exception;
 use JsonException;
 
-class document implements exportInterface, exportPreparationInterface, importInterface
+class Document implements ExportInterface, ExportPreparationInterface, ImportInterface
 {
-    use exportPreparationTrait;
+    use ExportPreparationTrait;
 
-    /** @var meta  */
-    public meta $meta;
+    /** @var Meta  */
+    public Meta $meta;
 
-    /** @var links  */
-    public links $links;
+    /** @var Links  */
+    public Links $links;
 
-    /** @var array|resourceObject[]  */
+    /** @var array|ResourceObject[]  */
     public array $resources=[];
 
-    /** @var resourceObject[]  */
+    /** @var ResourceObject[]  */
     public array $included=[];
 
     /** @var error[]  */
@@ -35,14 +35,14 @@ class document implements exportInterface, exportPreparationInterface, importInt
     private bool $forceResourceList=false;
 
     /**
-     * document constructor.
+     * Document constructor.
      * @param array|null $dataImport
      * @throws Exception
      */
     public function __construct(?array $dataImport=null)
     {
-        $this->meta = new meta();
-        $this->links = new links();
+        $this->meta = new Meta();
+        $this->links = new Links();
 
         if ($dataImport !== null){
             $this->importArray($dataImport);
@@ -50,9 +50,9 @@ class document implements exportInterface, exportPreparationInterface, importInt
     }
 
     /**
-     * @param resourceObject $resource
+     * @param ResourceObject $resource
      */
-    public function addResource(resourceObject $resource) : void
+    public function addResource(ResourceObject $resource) : void
     {
         $this->resources[] = $resource;
     }
@@ -76,10 +76,10 @@ class document implements exportInterface, exportPreparationInterface, importInt
     }
 
     /**
-     * @param resourceObject $resource
+     * @param ResourceObject $resource
      * @param bool $isPrimaryData
      */
-    private function addIncluded(resourceObject $resource, bool $isPrimaryData=false) : void
+    private function addIncluded(ResourceObject $resource, bool $isPrimaryData=false) : void
     {
         if (!$isPrimaryData) {
             $includedResourceFound = false;
@@ -174,20 +174,20 @@ class document implements exportInterface, exportPreparationInterface, importInt
             $included = $data['included'];
         }
 
-        if (array_key_exists('meta', $data)) {
-            $this->meta->importArray($data['meta']);
+        if (array_key_exists('Meta', $data)) {
+            $this->meta->importArray($data['Meta']);
         }
 
-        if (array_key_exists('links', $data)) {
-            $this->links->importArray($data['links']);
+        if (array_key_exists('Links', $data)) {
+            $this->links->importArray($data['Links']);
         }
 
         if (array_key_exists('data', $data)) {
             if (array_key_exists('type', $data['data'])){
-                $this->resources[] = new resourceObject(null, null, $data['data'], $included);
+                $this->resources[] = new ResourceObject(null, null, $data['data'], $included);
             } else {
                 foreach ($data['data'] as $resourceArray){
-                    $this->resources[] = new resourceObject(null, null, $resourceArray, $included);
+                    $this->resources[] = new ResourceObject(null, null, $resourceArray, $included);
                 }
             }
         }

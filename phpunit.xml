@@ -5,7 +5,7 @@
          stopOnFailure="false"
          stderr="true">
     <testsuites>
-        <testsuite name="jsonapi test">
+        <testsuite name="JsonApi test">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

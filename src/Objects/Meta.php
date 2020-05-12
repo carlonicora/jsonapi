@@ -1,12 +1,12 @@
 <?php
-namespace carlonicora\jsonapi\objects;
+namespace CarloNicora\JsonApi\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\interfaces\importInterface;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Interfaces\ImportInterface;
 use Exception;
 use RuntimeException;
 
-class meta implements exportPreparationInterface, importInterface
+class Meta implements ExportPreparationInterface, ImportInterface
 {
     /** @var array */
     private array $metaInformation = [];
@@ -19,7 +19,7 @@ class meta implements exportPreparationInterface, importInterface
     public function add(string $name, $value): void
     {
         if (array_key_exists($name, $this->metaInformation)){
-            throw new RuntimeException('meta key already exising', 1);
+            throw new RuntimeException('Meta key already exising', 1);
         }
 
         $this->metaInformation[$name] = $value;
@@ -32,7 +32,7 @@ class meta implements exportPreparationInterface, importInterface
      */
     public function get(string $name) {
         if (!array_key_exists($name, $this->metaInformation)){
-            throw new RuntimeException('meta key not exising', 2);
+            throw new RuntimeException('Meta key not exising', 2);
 
         }
 

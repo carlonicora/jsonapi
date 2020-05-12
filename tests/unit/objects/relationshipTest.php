@@ -1,14 +1,14 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\objects\relationship;
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Objects\Relationship;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 
-class relationshipTest extends abstractTestCase
+class RelationshipTest extends AbstractTestCase
 {
-    /** @var relationship */
-    private relationship $relationship;
+    /** @var Relationship */
+    private Relationship $relationship;
 
     public function setUp(): void
     {
@@ -19,7 +19,7 @@ class relationshipTest extends abstractTestCase
 
     public function testResourceLinkageInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(exportPreparationInterface::class, $this->relationship);
+        $this->assertInstanceOf(ExportPreparationInterface::class, $this->relationship);
     }
 
     public function testEmptyResourceLinkagePreparation() : void

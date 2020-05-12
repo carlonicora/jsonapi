@@ -1,15 +1,15 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\objects\resourceObject;
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Objects\ResourceObject;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 
-class resourceObjectTest extends abstractTestCase
+class ResourceObjectTest extends AbstractTestCase
 {
-    /** @var resourceObject */
-    private resourceObject $resource;
+    /** @var ResourceObject */
+    private ResourceObject $resource;
 
     /**
      * @throws Exception
@@ -23,7 +23,7 @@ class resourceObjectTest extends abstractTestCase
 
     public function testErrorInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(exportPreparationInterface::class, $this->resource);
+        $this->assertInstanceOf(ExportPreparationInterface::class, $this->resource);
     }
 
     public function testResourcePreparation() : void
@@ -59,7 +59,7 @@ class resourceObjectTest extends abstractTestCase
      */
     public function testImportData() : void
     {
-        $resource = new resourceObject(null, null, $this->arrayResourceFullWithRelatedLink);
+        $resource = new ResourceObject(null, null, $this->arrayResourceFullWithRelatedLink);
 
         $this->assertEquals($this->arrayResourceFullWithRelatedLink, $resource->prepare());
     }
@@ -71,7 +71,7 @@ class resourceObjectTest extends abstractTestCase
     {
         $this->expectExceptionCode(1);
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $resource = new resourceObject();
+        $resource = new ResourceObject();
     }
 
     /**
@@ -81,6 +81,6 @@ class resourceObjectTest extends abstractTestCase
     {
         $this->expectExceptionCode(2);
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $resource = new resourceObject(null, null, ['id' => '1']);
+        $resource = new ResourceObject(null, null, ['id' => '1']);
     }
 }

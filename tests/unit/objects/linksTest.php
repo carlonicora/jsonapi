@@ -1,15 +1,15 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\objects\links;
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Objects\Links;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 
-class linksTest extends abstractTestCase
+class LinksTest extends AbstractTestCase
 {
-    /** @var links */
-    private links $links;
+    /** @var Links */
+    private Links $links;
 
     public function setUp(): void
     {
@@ -20,7 +20,7 @@ class linksTest extends abstractTestCase
 
     public function testLinksInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(exportPreparationInterface::class, $this->links);
+        $this->assertInstanceOf(ExportPreparationInterface::class, $this->links);
     }
 
     /**

@@ -1,15 +1,15 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\objects\resourceIdentifier;
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Objects\ResourceIdentifier;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 
-class resourceIdentifierTest extends abstractTestCase
+class ResourceIdentifierTest extends AbstractTestCase
 {
-    /** @var resourceIdentifier */
-    private resourceIdentifier $resourceIdentifier;
+    /** @var ResourceIdentifier */
+    private ResourceIdentifier $resourceIdentifier;
 
     public function setUp(): void
     {
@@ -20,7 +20,7 @@ class resourceIdentifierTest extends abstractTestCase
 
     public function testErrorInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(exportPreparationInterface::class, $this->resourceIdentifier);
+        $this->assertInstanceOf(ExportPreparationInterface::class, $this->resourceIdentifier);
     }
 
     public function testResourceIdentifierPreparation() : void

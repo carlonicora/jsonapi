@@ -1,15 +1,15 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\objects\meta;
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Objects\Meta;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 
-class metaTest extends abstractTestCase
+class MetaTest extends AbstractTestCase
 {
-    /** @var meta */
-    private meta $meta;
+    /** @var Meta */
+    private Meta $meta;
 
     public function setUp(): void
     {
@@ -20,7 +20,7 @@ class metaTest extends abstractTestCase
 
     public function testMetaInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(exportPreparationInterface::class, $this->meta);
+        $this->assertInstanceOf(ExportPreparationInterface::class, $this->meta);
     }
 
     public function testAddingValidMeta() : void

@@ -1,7 +1,7 @@
 <?php
-namespace carlonicora\jsonapi\interfaces;
+namespace CarloNicora\JsonApi\Interfaces;
 
-interface exportInterface
+interface ExportInterface
 {
     /**
      * @return string

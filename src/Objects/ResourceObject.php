@@ -1,42 +1,42 @@
 <?php
-namespace carlonicora\jsonapi\objects;
+namespace CarloNicora\JsonApi\Objects;
 
-use carlonicora\jsonapi\interfaces\importInterface;
-use carlonicora\jsonapi\traits\exportPreparationTrait;
+use CarloNicora\JsonApi\Interfaces\ImportInterface;
+use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
 use Exception;
 use RuntimeException;
 
-class resourceObject extends resourceIdentifier implements importInterface
+class ResourceObject extends ResourceIdentifier implements ImportInterface
 {
-    use exportPreparationTrait;
+    use ExportPreparationTrait;
 
     /** @var attributes  */
     public attributes $attributes;
 
-    /** @var links  */
-    public links $links;
+    /** @var Links  */
+    public Links $links;
 
-    /** @var meta  */
-    public meta $meta;
+    /** @var Meta  */
+    public Meta $meta;
 
     /** @var array|relationship[] */
     public array $relationships=[];
 
     /**
-     * resourceObject constructor.
+     * ResourceObject constructor.
      * @param string $type
      * @param string|null $id
      * @param array|null $dataImport
      * @param array|null $included
-     * @param meta|null $resourceIdentifierMeta
+     * @param Meta|null $resourceIdentifierMeta
      * @throws Exception
      */
-    public function __construct(?string $type=null, ?string $id = null, ?array $dataImport=null, array $included=null, ?meta $resourceIdentifierMeta=null)
+    public function __construct(?string $type=null, ?string $id = null, ?array $dataImport=null, array $included=null, ?Meta $resourceIdentifierMeta=null)
     {
         $this->attributes = new attributes();
-        $this->links = new links();
-        $this->meta = new meta();
-        $this->resourceIdentifierMeta = new meta();
+        $this->links = new Links();
+        $this->meta = new Meta();
+        $this->resourceIdentifierMeta = new Meta();
 
         if ($type === null && $dataImport === null){
             throw new RuntimeException('Either type or the import data should be set', 1);
@@ -55,12 +55,12 @@ class resourceObject extends resourceIdentifier implements importInterface
 
     /**
      * @param string $relationshipKey
-     * @return relationship
+     * @return Relationship
      */
-    public function relationship(string $relationshipKey) : relationship
+    public function relationship(string $relationshipKey) : Relationship
     {
         if (!array_key_exists($relationshipKey, $this->relationships)) {
-            $this->relationships[$relationshipKey] = new relationship();
+            $this->relationships[$relationshipKey] = new Relationship();
         }
 
         return $this->relationships[$relationshipKey];
@@ -81,8 +81,8 @@ class resourceObject extends resourceIdentifier implements importInterface
     {
         $response = parent::prepare();
 
-        if (array_key_exists('meta', $response)){
-            unset($response['meta']);
+        if (array_key_exists('Meta', $response)){
+            unset($response['Meta']);
         }
 
         $response['attributes'] = $this->attributes->prepare();
@@ -110,7 +110,7 @@ class resourceObject extends resourceIdentifier implements importInterface
         if (array_key_exists('type', $data)){
             $this->type = $data['type'];
         } else {
-            throw new RuntimeException('Invalid jsonapi document imported', 2);
+            throw new RuntimeException('Invalid JsonApi document imported', 2);
         }
 
         if (array_key_exists('id', $data)) {
@@ -121,12 +121,12 @@ class resourceObject extends resourceIdentifier implements importInterface
             $this->attributes->importArray($data['attributes']);
         }
 
-        if (array_key_exists('meta', $data)) {
-            $this->meta->importArray($data['meta']);
+        if (array_key_exists('Meta', $data)) {
+            $this->meta->importArray($data['Meta']);
         }
 
-        if (array_key_exists('links', $data)) {
-            $this->links->importArray($data['links']);
+        if (array_key_exists('Links', $data)) {
+            $this->links->importArray($data['Links']);
         }
 
         if (array_key_exists('relationships', $data)) {

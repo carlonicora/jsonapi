@@ -1,13 +1,13 @@
 <?php
-namespace carlonicora\jsonapi;
+namespace CarloNicora\JsonApi;
 
-use carlonicora\jsonapi\objects\error;
+use CarloNicora\JsonApi\Objects\error;
 use JsonException;
 
-class response
+class Response
 {
-    /** @var document  */
-    public document $document;
+    /** @var Document  */
+    public Document $document;
 
     /** @var string  */
     public string $httpStatus=self::HTTP_STATUS_200;
@@ -85,11 +85,11 @@ class response
     public const HTTP_STATUS_504='504';
 
     /**
-     * response constructor.
+     * Response constructor.
      */
     public function __construct()
     {
-        $this->document = new document();
+        $this->document = new Document();
     }
 
     /**
@@ -146,7 +146,7 @@ class response
             return $this->document->export();
         } catch (JsonException $e) {
             $this->httpStatus = self::HTTP_STATUS_500;
-            $this->document = new document();
+            $this->document = new Document();
             $this->document->addError( new error(self::HTTP_STATUS_500, 'Failure in converting data to JSON', null, null, $this->generateStatusText()));
 
             return $this->document->export();

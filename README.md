@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/carlonicora/jsonapi/badge.svg?branch=dev)](https://coveralls.io/github/carlonicora/jsonapi?branch=dev)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b7565aa8862e94cadcf5/maintainability)](https://codeclimate.com/github/carlonicora/jsonapi/maintainability)
 
-jsonapi is a PHP library to manage [{json:api}](https://jsonapi.org) documents. The library also offers the possiblity
+JsonApi is a PHP library to manage [{json:api}](https://JsonApi.org) documents. The library also offers the possiblity
 to manage an http response directly from the library.  
 
 ## Installation
@@ -22,7 +22,7 @@ git clone https://github.com/carlonicora/jsonapi.git
 
 ## Config
 
-The jsonapi library does not require any configuration.
+The JsonApi library does not require any configuration.
 
 ## Docker
 
@@ -45,15 +45,15 @@ This library is organised around the objects identifiable in the
 The main object is the `document` object, which gives you access to the main elements a {json:api} document can contain. 
 
 ```php
-use \carlonicora\jsonapi\document;
+use \CarloNicora\JsonApi\document;
 
-$document = new document();
+$document = new Document();
 ```
 
 You can also import a {json:api} document from an array.
 
 ```php
-use \carlonicora\jsonapi\document;
+use \CarloNicora\JsonApi\Document;
 
 $array = [
     'data' => [
@@ -138,7 +138,7 @@ $array = [
     ]
 ];
 
-$document = new document($array);
+$document = new Document($array);
 ```
 
 ### resourceObject
@@ -146,19 +146,19 @@ $document = new document($array);
 A `resourceObject` is a {json:api} document primary data. The `document` object can contain multiple `resourceObject`.
 
 ```php
-use \carlonicora\jsonapi\objects\resourceObject;
-use \carlonicora\jsonapi\objects\link;
+use \CarloNicora\JsonApi\Objects\ResourceObject;
+use \CarloNicora\JsonApi\Objects\Link;
 
-$resource = new resourceObject('journal', 'iajhd80');
+$resource = new ResourceObject('journal', 'iajhd80');
 
 $resource->attributes->add('title', 'About phlow - the community media movement');
-$resource->links->add(new link('self', 'https://app.phlow.com/@carlo/journals/about-phlow-the-community-media-movement'));
+$resource->links->add(new Link('self', 'https://app.phlow.com/@carlo/journals/about-phlow-the-community-media-movement'));
 ```
 
 As for the `document`, a `resourceObject` can be populated by passing an array.
 
 ```php
-use \carlonicora\jsonapi\objects\resourceObject;
+use \CarloNicora\JsonApi\Objects\ResourceObject;
 
 $array = [
     'type' => 'journal',
@@ -171,16 +171,16 @@ $array = [
     ]
 ];
 
-$resource = new resourceObject(null, null, $array);
+$resource = new ResourceObject(null, null, $array);
 ```
 
 A `resourceObject` can contain multiple `relationship`, as defined in the {json:api} documentation.
 
 ```php
-use \carlonicora\jsonapi\objects\resourceObject;
+use \CarloNicora\JsonApi\Objects\ResourceObject;
 
-$resource = new resourceObject('journal', '1');
-$userResource = new resourceObject('user', '10');
+$resource = new ResourceObject('journal', '1');
+$userResource = new ResourceObject('user', '10');
 
 $resource->relationship('author')->resourceLinkage->add($userResource);
 ```

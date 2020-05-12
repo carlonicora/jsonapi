@@ -17,12 +17,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "carlonicora\\jsonapi\\":"src/"
+      "CarloNicora\\JsonApi\\":"src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "carlonicora\\jsonapi\\tests\\": "tests/"
+      "CarloNicora\\JsonApi\\tests\\": "tests/"
     }
   },
   "require": {

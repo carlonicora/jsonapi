@@ -1,15 +1,15 @@
 <?php
-namespace carlonicora\jsonapi\objects;
+namespace CarloNicora\JsonApi\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\traits\exportPreparationTrait;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
 
-class resourceIdentifier implements exportPreparationInterface
+class ResourceIdentifier implements ExportPreparationInterface
 {
-    use exportPreparationTrait;
+    use ExportPreparationTrait;
 
-    /** @var meta  */
-    public meta $resourceIdentifierMeta;
+    /** @var Meta  */
+    public Meta $resourceIdentifierMeta;
 
     /** @var string  */
     public string $type;
@@ -18,7 +18,7 @@ class resourceIdentifier implements exportPreparationInterface
     public ?string $id=null;
 
     /**
-     * resourceIdentifier constructor.
+     * ResourceIdentifier constructor.
      * @param string $type
      * @param string|null $id
      */
@@ -27,7 +27,7 @@ class resourceIdentifier implements exportPreparationInterface
         $this->type = $type;
         $this->id = $id;
 
-        $this->resourceIdentifierMeta = new meta();
+        $this->resourceIdentifierMeta = new Meta();
     }
 
     /**

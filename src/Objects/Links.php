@@ -1,24 +1,24 @@
 <?php
-namespace carlonicora\jsonapi\objects;
+namespace CarloNicora\JsonApi\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\interfaces\importInterface;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Interfaces\ImportInterface;
 use Exception;
 use RuntimeException;
 
-class links implements exportPreparationInterface, importInterface
+class Links implements ExportPreparationInterface, ImportInterface
 {
-    /** @var link[]  */
+    /** @var Link[]  */
     private array $links=[];
 
     /**
-     * @param link $link
+     * @param Link $link
      * @throws Exception
      */
-    public function add(link $link) : void
+    public function add(Link $link) : void
     {
         if (array_key_exists($link->name, $this->links)){
-            throw new RuntimeException('link key already exising', 1);
+            throw new RuntimeException('Link key already exising', 1);
         }
 
         $this->links[$link->name] = $link;
@@ -26,12 +26,12 @@ class links implements exportPreparationInterface, importInterface
 
     /**
      * @param string $name
-     * @return link
+     * @return Link
      * @throws Exception
      */
-    public function get(string $name): link {
+    public function get(string $name): Link {
         if (!array_key_exists($name, $this->links)){
-            throw new RuntimeException('link key not exising', 2);
+            throw new RuntimeException('Link key not exising', 2);
 
         }
 
@@ -70,11 +70,11 @@ class links implements exportPreparationInterface, importInterface
     {
         foreach ($data as $linkKey=>$linkValue){
             if (is_array($linkValue)) {
-                $meta = new meta();
-                $meta->importArray($linkValue['meta']);
-                $link = new link($linkKey, $linkValue['href'], $meta);
+                $meta = new Meta();
+                $meta->importArray($linkValue['Meta']);
+                $link = new Link($linkKey, $linkValue['href'], $meta);
             } else {
-                $link = new link($linkKey, $linkValue);
+                $link = new Link($linkKey, $linkValue);
             }
 
             $this->add($link);

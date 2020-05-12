@@ -1,10 +1,10 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 
-class linkTest extends abstractTestCase
+class LinkTest extends AbstractTestCase
 {
     public function testCreateLink() : void {
         $link = $this->generateLink();
@@ -19,6 +19,6 @@ class linkTest extends abstractTestCase
         $link = $this->generateLinkWithMeta();
 
         $this->assertEquals('https://self', $link->prepare()['self']['href']);
-        $this->assertEquals(1, $link->prepare()['self']['meta']['metaOne']);
+        $this->assertEquals(1, $link->prepare()['self']['Meta']['metaOne']);
     }
 }

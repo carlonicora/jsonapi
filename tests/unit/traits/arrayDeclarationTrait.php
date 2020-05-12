@@ -1,10 +1,10 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\traits;
+namespace CarloNicora\JsonApi\tests\Unit\Traits;
 
-trait arrayDeclarationTrait
+trait ArrayDeclarationTrait
 {
     /** @var array|string[]  */
-    protected array $arrayMetaOnly = ['meta' => []];
+    protected array $arrayMetaOnly = ['Meta' => []];
 
     /** @var array|string[]  */
     protected array $arrayResourceIdentifier = [
@@ -24,7 +24,7 @@ trait arrayDeclarationTrait
     protected array $arrayResourceIdentifierWithMeta = [
         'type' => 'user',
         'id' => '1',
-        'meta' => [
+        'Meta' => [
             'metaOne' => 1,
             'metaTwo' => 2
         ]
@@ -34,7 +34,7 @@ trait arrayDeclarationTrait
     protected array $arrayLinks = [
         'self' => [
             'href' => 'https://self',
-            'meta' => [
+            'Meta' => [
                 'metaOne' => 1,
                 'metaTwo' => 2
             ]
@@ -58,7 +58,7 @@ trait arrayDeclarationTrait
         'code' => 'code',
         'title' => 'title',
         'detail' => 'detail',
-        'links' => [
+        'Links' => [
             'self' => 'https://self'
         ]
     ];
@@ -70,7 +70,7 @@ trait arrayDeclarationTrait
         'code' => 'code',
         'title' => 'title',
         'detail' => 'detail',
-        'meta' => [
+        'Meta' => [
             'metaOne' => 1,
             'metaTwo' => 2
         ]
@@ -85,14 +85,14 @@ trait arrayDeclarationTrait
     protected array $arrayResourceFull = [
         'type' => 'user',
         'id' => '1',
-        'meta' => [
+        'Meta' => [
             'metaOne' => 1,
             'metaTwo' => 2
         ],
         'attributes' => [
             'name' => 'Carlo'
         ],
-        'links' => [
+        'Links' => [
             'self' => 'https://self'
         ]
     ];
@@ -101,18 +101,18 @@ trait arrayDeclarationTrait
     protected array $arrayResourceFullWithRelatedLink = [
         'type' => 'user',
         'id' => '1',
-        'meta' => [
+        'Meta' => [
             'metaOne' => 1,
             'metaTwo' => 2
         ],
         'attributes' => [
             'name' => 'Carlo'
         ],
-        'links' => [
+        'Links' => [
             'self' => 'https://self',
             'related' => [
                 'href' => 'https://related',
-                'meta' => [
+                'Meta' => [
                     'metaThree' => 3
                 ]
             ]
@@ -130,7 +130,7 @@ trait arrayDeclarationTrait
         [
             'type' => 'user',
             'id' => '1',
-            'meta' => [
+            'Meta' => [
                 'metaOne' => 1,
                 'metaTwo' => 2
             ]
@@ -138,7 +138,7 @@ trait arrayDeclarationTrait
         [
             'type' => 'user',
             'id' => '1',
-            'meta' => [
+            'Meta' => [
                 'metaOne' => 1,
                 'metaTwo' => 2
             ]
@@ -153,7 +153,7 @@ trait arrayDeclarationTrait
             'attributes' => [
                 'title' => 'title'
             ],
-            'links' => [
+            'Links' => [
                 'self' => 'https://article/1'
             ],
             'relationships' => [
@@ -184,7 +184,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'name' => 'Carlo'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://user/10'
                 ],
                 'relationships' => [
@@ -202,7 +202,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/103.jpg'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://image/103'
                 ]
             ],
@@ -212,7 +212,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/101.jpg'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://image/101'
                 ]
             ],
@@ -222,7 +222,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/102.jpg'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://image/102'
                 ]
             ],
@@ -238,7 +238,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'title' => 'title'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://article/1'
                 ],
                 'relationships' => [
@@ -270,7 +270,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'name' => 'Carlo'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://user/10'
                 ],
                 'relationships' => [
@@ -288,7 +288,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/103.jpg'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://image/103'
                 ]
             ],
@@ -298,7 +298,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/101.jpg'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://image/101'
                 ],
                 'relationships' => [
@@ -316,7 +316,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/102.jpg'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://image/102'
                 ]
             ],
@@ -331,15 +331,15 @@ trait arrayDeclarationTrait
             'attributes' => [
                 'title' => 'title'
             ],
-            'links' => [
+            'Links' => [
                 'self' => 'https://article/1'
             ],
             'relationships' => [
                 'author' => [
-                    'links' => [
+                    'Links' => [
                         'self' => 'https://author/1'
                     ],
-                    'meta' => [
+                    'Meta' => [
                         'metaOneString' => '1',
                         'metaTwo' => 2
                     ],
@@ -369,7 +369,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'name' => 'Carlo'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://user/10'
                 ],
                 'relationships' => [
@@ -387,7 +387,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/103.jpg'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://image/103'
                 ]
             ],
@@ -397,7 +397,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/101.jpg'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://image/101'
                 ],
                 'relationships' => [
@@ -415,7 +415,7 @@ trait arrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/102.jpg'
                 ],
-                'links' => [
+                'Links' => [
                     'self' => 'https://image/102'
                 ]
             ],

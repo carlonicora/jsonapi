@@ -1,12 +1,12 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit;
+namespace CarloNicora\JsonApi\tests\Unit;
 
-use carlonicora\jsonapi\document;
-use carlonicora\jsonapi\response;
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\Document;
+use CarloNicora\JsonApi\Response;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use JsonException;
 
-class responseTest extends abstractTestCase
+class ResponseTest extends AbstractTestCase
 {
 
     public function testResponseCreation() : void
@@ -25,7 +25,7 @@ class responseTest extends abstractTestCase
     {
         $response = $this->generateResponse();
 
-        $document = $this->getMockBuilder(document::class)
+        $document = $this->getMockBuilder(Document::class)
             ->getMock();
 
         $document->method('export')
@@ -33,7 +33,7 @@ class responseTest extends abstractTestCase
                 new JsonException()
             );
 
-        /** @var document $document */
+        /** @var Document $document */
         $response->document = $document;
 
         $this->assertEquals($this->jsonResponseError, $response->render());
@@ -41,7 +41,7 @@ class responseTest extends abstractTestCase
 
     public function testJsonRecursiveException() : void
     {
-        $response = $this->getMockBuilder(response::class)
+        $response = $this->getMockBuilder(Response::class)
             ->onlyMethods(['generateResponseData'])
             ->getMock();
 
@@ -50,64 +50,64 @@ class responseTest extends abstractTestCase
                 new JsonException()
             );
 
-        /** @var response $response */
+        /** @var Response $response */
 
         $this->assertNull($response->render());
     }
 
     public function test200() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_200);
+        $response = $this->generateResponse(Response::HTTP_STATUS_200);
         $this->assertEquals('OK', $this->invokeMethod($response, 'generateStatusText'));
         $this->assertEquals($this->jsonDocumentMinimal, $response->render());
     }
 
     public function test201() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_201);
+        $response = $this->generateResponse(Response::HTTP_STATUS_201);
         $this->assertEquals('Created', $this->invokeMethod($response, 'generateStatusText'));
         $this->assertNull($response->render());
     }
 
     public function test204() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_204);
+        $response = $this->generateResponse(Response::HTTP_STATUS_204);
         $this->assertEquals('No Content', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test304() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_304);
+        $response = $this->generateResponse(Response::HTTP_STATUS_304);
         $this->assertEquals('Not Modified', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test400() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_400);
+        $response = $this->generateResponse(Response::HTTP_STATUS_400);
         $this->assertEquals('Bad Request', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test401() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_401);
+        $response = $this->generateResponse(Response::HTTP_STATUS_401);
         $this->assertEquals('Unauthorized', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test403() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_403);
+        $response = $this->generateResponse(Response::HTTP_STATUS_403);
         $this->assertEquals('Forbidden', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test404() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_404);
+        $response = $this->generateResponse(Response::HTTP_STATUS_404);
         $this->assertEquals('Not Found', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test405() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_405);
+        $response = $this->generateResponse(Response::HTTP_STATUS_405);
         $this->assertEquals('Method Not Allowed', $this->invokeMethod($response, 'generateStatusText'));
     }
 
@@ -119,19 +119,19 @@ class responseTest extends abstractTestCase
 
     public function test409() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_409);
+        $response = $this->generateResponse(Response::HTTP_STATUS_409);
         $this->assertEquals('Conflict', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test410() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_410);
+        $response = $this->generateResponse(Response::HTTP_STATUS_410);
         $this->assertEquals('Gone', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test411() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_411);
+        $response = $this->generateResponse(Response::HTTP_STATUS_411);
         $this->assertEquals('Length Required', $this->invokeMethod($response, 'generateStatusText'));
     }
 
@@ -143,55 +143,55 @@ class responseTest extends abstractTestCase
 
     public function test415() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_415);
+        $response = $this->generateResponse(Response::HTTP_STATUS_415);
         $this->assertEquals('Unsupported Media Type', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test422() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_422);
+        $response = $this->generateResponse(Response::HTTP_STATUS_422);
         $this->assertEquals('Unprocessable Entity', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test428() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_428);
+        $response = $this->generateResponse(Response::HTTP_STATUS_428);
         $this->assertEquals('Precondition Required', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test429() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_429);
+        $response = $this->generateResponse(Response::HTTP_STATUS_429);
         $this->assertEquals('Too Many Requests', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test500() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_500);
+        $response = $this->generateResponse(Response::HTTP_STATUS_500);
         $this->assertEquals('Internal Server Error', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test501() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_501);
+        $response = $this->generateResponse(Response::HTTP_STATUS_501);
         $this->assertEquals('Not Implemented', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test502() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_502);
+        $response = $this->generateResponse(Response::HTTP_STATUS_502);
         $this->assertEquals('Bad Gateway', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test503() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_503);
+        $response = $this->generateResponse(Response::HTTP_STATUS_503);
         $this->assertEquals('Service Unavailable', $this->invokeMethod($response, 'generateStatusText'));
     }
 
     public function test504() : void
     {
-        $response = $this->generateResponse(response::HTTP_STATUS_504);
+        $response = $this->generateResponse(Response::HTTP_STATUS_504);
         $this->assertEquals('Gateway Timeout', $this->invokeMethod($response, 'generateStatusText'));
     }
 }

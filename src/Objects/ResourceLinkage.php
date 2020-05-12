@@ -1,14 +1,14 @@
 <?php
-namespace carlonicora\jsonapi\objects;
+namespace CarloNicora\JsonApi\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 
-class resourceLinkage implements exportPreparationInterface
+class ResourceLinkage implements ExportPreparationInterface
 {
-    /** @var resourceObject[] */
+    /** @var ResourceObject[] */
     public array $resources = [];
 
-    public function add(resourceObject $resource) : void
+    public function add(ResourceObject $resource) : void
     {
         $this->resources[] = $resource;
     }

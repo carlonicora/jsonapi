@@ -1,15 +1,15 @@
 <?php
-namespace carlonicora\jsonapi\tests\unit\objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\objects\resourceLinkage;
-use carlonicora\jsonapi\tests\unit\abstracts\abstractTestCase;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Objects\ResourceLinkage;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 
-class resourceLinkageTest extends abstractTestCase
+class ResourceLinkageTest extends AbstractTestCase
 {
-    /** @var resourceLinkage */
-    private resourceLinkage $resourceLinkage;
+    /** @var ResourceLinkage */
+    private ResourceLinkage $resourceLinkage;
 
     public function setUp(): void
     {
@@ -20,7 +20,7 @@ class resourceLinkageTest extends abstractTestCase
 
     public function testResourceLinkageInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(exportPreparationInterface::class, $this->resourceLinkage);
+        $this->assertInstanceOf(ExportPreparationInterface::class, $this->resourceLinkage);
     }
 
     public function testEmptyResourceLinkagePreparation() : void

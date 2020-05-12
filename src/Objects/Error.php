@@ -1,12 +1,12 @@
 <?php
-namespace carlonicora\jsonapi\objects;
+namespace CarloNicora\JsonApi\Objects;
 
-use carlonicora\jsonapi\interfaces\exportPreparationInterface;
-use carlonicora\jsonapi\traits\exportPreparationTrait;
+use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
 
-class error implements exportPreparationInterface
+class Error implements ExportPreparationInterface
 {
-    use exportPreparationTrait;
+    use ExportPreparationTrait;
 
     /** @var string  */
     private ?string $status;
@@ -26,12 +26,11 @@ class error implements exportPreparationInterface
     /** @var array|null  */
     //private ?array $source=null;
 
+    /** @var Meta  */
+    public Meta $meta;
 
-    /** @var meta  */
-    public meta $meta;
-
-    /** @var links */
-    public links $links;
+    /** @var Links */
+    public Links $links;
 
     public function __construct(
         ?string $status=null,
@@ -46,8 +45,8 @@ class error implements exportPreparationInterface
         $this->title = $title;
         $this->detail = $detail;
 
-        $this->meta = new meta();
-        $this->links = new links();
+        $this->meta = new Meta();
+        $this->links = new Links();
     }
 
     /**
