@@ -1,10 +1,10 @@
 <?php
 namespace CarloNicora\JsonApi\Objects;
 
+use CarloNicora\JsonApi\Exception\LinksException;
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Interfaces\ImportInterface;
 use Exception;
-use RuntimeException;
 
 class Links implements ExportPreparationInterface, ImportInterface
 {
@@ -18,7 +18,7 @@ class Links implements ExportPreparationInterface, ImportInterface
     public function add(Link $link) : void
     {
         if (array_key_exists($link->name, $this->links)){
-            throw new RuntimeException('Link key already exising', 1);
+            throw new LinksException($link->name, LinksException::DUPLICATED_LINK);
         }
 
         $this->links[$link->name] = $link;
@@ -31,7 +31,7 @@ class Links implements ExportPreparationInterface, ImportInterface
      */
     public function get(string $name): Link {
         if (!array_key_exists($name, $this->links)){
-            throw new RuntimeException('Link key not exising', 2);
+            throw new LinksException($name, LinksException::LINK_NOT_FOUND);
 
         }
 

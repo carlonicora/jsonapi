@@ -1,6 +1,7 @@
 <?php
 namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
+use CarloNicora\JsonApi\Exception\LinksException;
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Objects\Links;
 use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
@@ -36,7 +37,7 @@ class LinksTest extends AbstractTestCase
      * @throws Exception
      */
     public function testAddingDuplicatedLink() : void {
-        $this->expectExceptionCode(1);
+        $this->expectExceptionCode(LinksException::DUPLICATED_LINK);
 
         $this->links->add($this->generateLink());
         $this->links->add($this->generateLink());
@@ -47,7 +48,7 @@ class LinksTest extends AbstractTestCase
      */
     public function testGettingNonExistingLink() : void
     {
-        $this->expectExceptionCode(2);
+        $this->expectExceptionCode(LinksException::LINK_NOT_FOUND);
         $this->links->get('nonExistingLink');
     }
 

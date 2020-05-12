@@ -1,6 +1,7 @@
 <?php
 namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
+use CarloNicora\JsonApi\Exception\AttributeException;
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Objects\Attributes;
 use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
@@ -37,7 +38,7 @@ class AttributesTest extends AbstractTestCase
      * @throws Exception
      */
     public function testAddingDuplicatedAttribute() : void {
-        $this->expectExceptionCode(1);
+        $this->expectExceptionCode(AttributeException::DUPLICATED_ATTRIBUTE);
 
         $this->attributes->add('name', 'Carlo');
         $this->attributes->add('name', 'Carlo');
@@ -48,7 +49,7 @@ class AttributesTest extends AbstractTestCase
      */
     public function testGettingNonExistingMeta() : void
     {
-        $this->expectExceptionCode(2);
+        $this->expectExceptionCode(AttributeException::ATTRIBUTE_NOT_FOUND);
         $this->attributes->get('nonExistingAttribute');
     }
 

@@ -1,10 +1,10 @@
 <?php
 namespace CarloNicora\JsonApi\Objects;
 
+use CarloNicora\JsonApi\Exception\AttributeException;
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Interfaces\ImportInterface;
 use Exception;
-use RuntimeException;
 
 class Attributes implements ExportPreparationInterface, ImportInterface
 {
@@ -19,7 +19,7 @@ class Attributes implements ExportPreparationInterface, ImportInterface
     public function add(string $name, $value): void
     {
         if (array_key_exists($name, $this->attributes)){
-            throw new RuntimeException('Meta key already exising', 1);
+            throw new AttributeException($name, AttributeException::DUPLICATED_ATTRIBUTE);
         }
 
         $this->attributes[$name] = $value;
@@ -32,7 +32,7 @@ class Attributes implements ExportPreparationInterface, ImportInterface
      */
     public function get(string $name) {
         if (!array_key_exists($name, $this->attributes)){
-            throw new RuntimeException('Meta key not exising', 2);
+            throw new AttributeException($name, AttributeException::ATTRIBUTE_NOT_FOUND);
 
         }
 

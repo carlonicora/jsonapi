@@ -1,6 +1,7 @@
 <?php
 namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
+use CarloNicora\JsonApi\Exception\MetaException;
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Objects\Meta;
 use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
@@ -37,7 +38,7 @@ class MetaTest extends AbstractTestCase
      * @throws Exception
      */
     public function testAddingDuplicatedMeta() : void {
-        $this->expectExceptionCode(1);
+        $this->expectExceptionCode(MetaException::DUPLICATED_META);
 
         $this->meta->add('metaOne', 1);
         $this->meta->add('metaOne', 1);
@@ -48,7 +49,7 @@ class MetaTest extends AbstractTestCase
      */
     public function testGettingNonExistingMeta() : void
     {
-        $this->expectExceptionCode(2);
+        $this->expectExceptionCode(MetaException::META_NOT_FOUND);
         $this->meta->get('nonExistingMeta');
     }
 }
