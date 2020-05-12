@@ -50,9 +50,10 @@ class Error implements ExportPreparationInterface
     }
 
     /**
+     * @param array|null $requiredFields
      * @return array
      */
-    public function prepare(): array
+    public function prepare(?array $requiredFields=null): array
     {
         $response = [];
 

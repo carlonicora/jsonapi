@@ -14,7 +14,7 @@ trait ExportPreparationTrait
     private function prepareMeta(Meta $meta, array &$response, bool $overrideEmptyMeta=false) : void
     {
         if ($overrideEmptyMeta || 0 !== $meta->count()) {
-            $response['Meta'] = $meta->prepare();
+            $response['meta'] = $meta->prepare();
         }
     }
 

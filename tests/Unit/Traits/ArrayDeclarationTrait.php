@@ -4,7 +4,7 @@ namespace CarloNicora\JsonApi\tests\Unit\Traits;
 trait ArrayDeclarationTrait
 {
     /** @var array|string[]  */
-    protected array $arrayMetaOnly = ['Meta' => []];
+    protected array $arrayMetaOnly = ['meta' => []];
 
     /** @var array|string[]  */
     protected array $arrayResourceIdentifier = [
@@ -24,7 +24,7 @@ trait ArrayDeclarationTrait
     protected array $arrayResourceIdentifierWithMeta = [
         'type' => 'user',
         'id' => '1',
-        'Meta' => [
+        'meta' => [
             'metaOne' => 1,
             'metaTwo' => 2
         ]
@@ -34,7 +34,7 @@ trait ArrayDeclarationTrait
     protected array $arrayLinks = [
         'self' => [
             'href' => 'https://self',
-            'Meta' => [
+            'meta' => [
                 'metaOne' => 1,
                 'metaTwo' => 2
             ]
@@ -70,7 +70,7 @@ trait ArrayDeclarationTrait
         'code' => 'code',
         'title' => 'title',
         'detail' => 'detail',
-        'Meta' => [
+        'meta' => [
             'metaOne' => 1,
             'metaTwo' => 2
         ]
@@ -85,7 +85,7 @@ trait ArrayDeclarationTrait
     protected array $arrayResourceFull = [
         'type' => 'user',
         'id' => '1',
-        'Meta' => [
+        'meta' => [
             'metaOne' => 1,
             'metaTwo' => 2
         ],
@@ -101,7 +101,7 @@ trait ArrayDeclarationTrait
     protected array $arrayResourceFullWithRelatedLink = [
         'type' => 'user',
         'id' => '1',
-        'Meta' => [
+        'meta' => [
             'metaOne' => 1,
             'metaTwo' => 2
         ],
@@ -112,7 +112,7 @@ trait ArrayDeclarationTrait
             'self' => 'https://self',
             'related' => [
                 'href' => 'https://related',
-                'Meta' => [
+                'meta' => [
                     'metaThree' => 3
                 ]
             ]
@@ -130,7 +130,7 @@ trait ArrayDeclarationTrait
         [
             'type' => 'user',
             'id' => '1',
-            'Meta' => [
+            'meta' => [
                 'metaOne' => 1,
                 'metaTwo' => 2
             ]
@@ -138,7 +138,7 @@ trait ArrayDeclarationTrait
         [
             'type' => 'user',
             'id' => '1',
-            'Meta' => [
+            'meta' => [
                 'metaOne' => 1,
                 'metaTwo' => 2
             ]
@@ -147,6 +147,168 @@ trait ArrayDeclarationTrait
 
     /** @var array  */
     protected array $arrayDocumentSuperDuper = [
+        'data' => [
+            'type' => 'article',
+            'id' => '1',
+            'attributes' => [
+                'title' => 'title',
+                'additionalAttribute1' => 'addAttr1',
+                'additionalAttribute2' => 'addAttr2'
+            ],
+            'Links' => [
+                'self' => 'https://article/1'
+            ],
+            'relationships' => [
+                'author' => [
+                    'data' => [
+                        'type' => 'user',
+                        'id' => '10'
+                    ]
+                ],
+                'images' => [
+                    'data' => [
+                        [
+                            'type' => 'image',
+                            'id' => '101'
+                        ],
+                        [
+                            'type' => 'image',
+                            'id' => '102'
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'included' => [
+            [
+                'type' => 'user',
+                'id' => '10',
+                'attributes' => [
+                    'name' => 'Carlo',
+                    'additionalAttribute1' => 'addAttr1',
+                    'additionalAttribute2' => 'addAttr2'
+                ],
+                'Links' => [
+                    'self' => 'https://user/10'
+                ],
+                'relationships' => [
+                    'images' => [
+                        'data' => [
+                            'type' => 'image',
+                            'id' => '103'
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'type' => 'image',
+                'id' => '103',
+                'attributes' => [
+                    'url' => 'https://image/103.jpg',
+                    'additionalAttribute1' => 'addAttr1',
+                    'additionalAttribute2' => 'addAttr2'
+                ],
+                'Links' => [
+                    'self' => 'https://image/103'
+                ]
+            ],
+            [
+                'type' => 'image',
+                'id' => '101',
+                'attributes' => [
+                    'url' => 'https://image/101.jpg',
+                    'additionalAttribute1' => 'addAttr1',
+                    'additionalAttribute2' => 'addAttr2'
+                ],
+                'Links' => [
+                    'self' => 'https://image/101'
+                ]
+            ],
+            [
+                'type' => 'image',
+                'id' => '102',
+                'attributes' => [
+                    'url' => 'https://image/102.jpg',
+                    'additionalAttribute1' => 'addAttr1',
+                    'additionalAttribute2' => 'addAttr2'
+                ],
+                'Links' => [
+                    'self' => 'https://image/102'
+                ]
+            ],
+        ]
+    ];
+
+    protected array $arrayDocumentSuperDuperPartial = [
+        'data' => [
+            'type' => 'article',
+            'id' => '1',
+            'attributes' => [
+                'title' => 'title',
+                'additionalAttribute1' => 'addAttr1',
+                'additionalAttribute2' => 'addAttr2'
+            ],
+            'Links' => [
+                'self' => 'https://article/1'
+            ],
+            'relationships' => [
+                'author' => [
+                    'data' => [
+                        'type' => 'user',
+                        'id' => '10'
+                    ]
+                ],
+                'images' => [
+                    'data' => [
+                        [
+                            'type' => 'image',
+                            'id' => '101'
+                        ],
+                        [
+                            'type' => 'image',
+                            'id' => '102'
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'included' => [
+            [
+                'type' => 'user',
+                'id' => '10',
+                'attributes' => [
+                    'name' => 'Carlo',
+                    'additionalAttribute1' => 'addAttr1',
+                    'additionalAttribute2' => 'addAttr2'
+                ],
+                'Links' => [
+                    'self' => 'https://user/10'
+                ],
+                'relationships' => [
+                    'images' => [
+                        'data' => [
+                            'type' => 'image',
+                            'id' => '103'
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'type' => 'image',
+                'id' => '103',
+                'attributes' => [
+                    'url' => 'https://image/103.jpg',
+                    'additionalAttribute1' => 'addAttr1',
+                    'additionalAttribute2' => 'addAttr2'
+                ],
+                'Links' => [
+                    'self' => 'https://image/103'
+                ]
+            ]
+        ]
+    ];
+
+    protected array $arrayDocumentSuperDuperPartialLimited = [
         'data' => [
             'type' => 'article',
             'id' => '1',
@@ -205,27 +367,7 @@ trait ArrayDeclarationTrait
                 'Links' => [
                     'self' => 'https://image/103'
                 ]
-            ],
-            [
-                'type' => 'image',
-                'id' => '101',
-                'attributes' => [
-                    'url' => 'https://image/101.jpg'
-                ],
-                'Links' => [
-                    'self' => 'https://image/101'
-                ]
-            ],
-            [
-                'type' => 'image',
-                'id' => '102',
-                'attributes' => [
-                    'url' => 'https://image/102.jpg'
-                ],
-                'Links' => [
-                    'self' => 'https://image/102'
-                ]
-            ],
+            ]
         ]
     ];
 
@@ -339,7 +481,7 @@ trait ArrayDeclarationTrait
                     'Links' => [
                         'self' => 'https://author/1'
                     ],
-                    'Meta' => [
+                    'meta' => [
                         'metaOneString' => '1',
                         'metaTwo' => 2
                     ],

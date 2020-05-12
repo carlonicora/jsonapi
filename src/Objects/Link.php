@@ -31,9 +31,10 @@ class Link implements ExportPreparationInterface
     }
 
     /**
+     * @param array|null $requiredFields
      * @return array
      */
-    public function prepare(): array
+    public function prepare(?array $requiredFields=null): array
     {
         $response = [];
 
@@ -42,7 +43,7 @@ class Link implements ExportPreparationInterface
         } else {
             $response[$this->name] = [];
             $response[$this->name]['href'] = $this->href;
-            $response[$this->name]['Meta'] = $this->meta->prepare();
+            $response[$this->name]['meta'] = $this->meta->prepare();
         }
 
         return $response;

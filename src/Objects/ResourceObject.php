@@ -75,17 +75,18 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
     }
 
     /**
+     * @param array|null $requiredFields
      * @return array
      */
-    public function prepare(): array
+    public function prepare(?array $requiredFields=null): array
     {
         $response = parent::prepare();
 
-        if (array_key_exists('Meta', $response)){
-            unset($response['Meta']);
+        if (array_key_exists('meta', $response)){
+            unset($response['meta']);
         }
 
-        $response['attributes'] = $this->attributes->prepare();
+        $response['attributes'] = $this->attributes->prepare($requiredFields);
 
         $this->prepareMeta($this->meta, $response);
         $this->prepareLinks($this->links, $response);
@@ -121,8 +122,8 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
             $this->attributes->importArray($data['attributes']);
         }
 
-        if (array_key_exists('Meta', $data)) {
-            $this->meta->importArray($data['Meta']);
+        if (array_key_exists('meta', $data)) {
+            $this->meta->importArray($data['meta']);
         }
 
         if (array_key_exists('Links', $data)) {

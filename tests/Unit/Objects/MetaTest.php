@@ -52,4 +52,10 @@ class MetaTest extends AbstractTestCase
         $this->expectExceptionCode(MetaException::META_NOT_FOUND);
         $this->meta->get('nonExistingMeta');
     }
+
+    public function testEmptyLinksException() : void
+    {
+        $exception = new MetaException();
+        $this->assertEquals('', $exception->getMessage());
+    }
 }

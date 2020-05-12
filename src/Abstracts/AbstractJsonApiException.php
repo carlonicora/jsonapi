@@ -16,7 +16,7 @@ abstract class AbstractJsonApiException extends Exception
     {
         $completeMessage = $this->returnMessage($code);
 
-        if ($message === null) {
+        if ($message !== '') {
             $completeMessage .= '('.$message.')';
         }
 

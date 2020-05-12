@@ -47,9 +47,10 @@ class Links implements ExportPreparationInterface, ImportInterface
     }
 
     /**
+     * @param array|null $requiredFields
      * @return array
      */
-    public function prepare(): array
+    public function prepare(?array $requiredFields=null): array
     {
         $response = [];
 
@@ -71,7 +72,7 @@ class Links implements ExportPreparationInterface, ImportInterface
         foreach ($data as $linkKey=>$linkValue){
             if (is_array($linkValue)) {
                 $meta = new Meta();
-                $meta->importArray($linkValue['Meta']);
+                $meta->importArray($linkValue['meta']);
                 $link = new Link($linkKey, $linkValue['href'], $meta);
             } else {
                 $link = new Link($linkKey, $linkValue);

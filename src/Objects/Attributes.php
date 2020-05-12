@@ -40,11 +40,24 @@ class Attributes implements ExportPreparationInterface, ImportInterface
     }
 
     /**
+     * @param array|null $requiredFields
      * @return array
      */
-    public function prepare(): array
+    public function prepare(?array $requiredFields=null): array
     {
-        return $this->attributes;
+        if ($requiredFields === null) {
+            return $this->attributes;
+        }
+
+        $response = [];
+
+        foreach ($this->attributes as $attributeName => $attributeValue) {
+            if (in_array($attributeName, $requiredFields, true)){
+                $response[$attributeName] = $attributeValue;
+            }
+        }
+
+        return $response;
     }
 
     /**

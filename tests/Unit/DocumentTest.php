@@ -3,7 +3,6 @@ namespace CarloNicora\JsonApi\tests\Unit;
 
 use CarloNicora\JsonApi\Document;
 use CarloNicora\JsonApi\Interfaces\ExportInterface;
-use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Objects\Link;
 use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
@@ -17,7 +16,6 @@ class DocumentTest extends AbstractTestCase
         $document = $this->generateDocumentEmpty();
 
         $this->assertInstanceOf(ExportInterface::class, $document);
-        $this->assertInstanceOf(ExportPreparationInterface::class, $document);
     }
 
     public function testCheckDocumentMinimalRequirementsMeta() : void
@@ -55,22 +53,32 @@ class DocumentTest extends AbstractTestCase
 
         $article = new ResourceObject('article', '1');
         $article->attributes->add('title', 'title');
+        $article->attributes->add('additionalAttribute1', 'addAttr1');
+        $article->attributes->add('additionalAttribute2', 'addAttr2');
         $article->links->add(new Link('self', 'https://article/1'));
 
         $author = new ResourceObject('user', '10');
         $author->attributes->add('name', 'Carlo');
+        $author->attributes->add('additionalAttribute1', 'addAttr1');
+        $author->attributes->add('additionalAttribute2', 'addAttr2');
         $author->links->add(new Link('self', 'https://user/10'));
 
         $image101 = new ResourceObject('image', '101');
         $image101->attributes->add('url', 'https://image/101.jpg');
+        $image101->attributes->add('additionalAttribute1', 'addAttr1');
+        $image101->attributes->add('additionalAttribute2', 'addAttr2');
         $image101->links->add(new Link('self', 'https://image/101'));
 
         $image102 = new ResourceObject('image', '102');
         $image102->attributes->add('url', 'https://image/102.jpg');
+        $image102->attributes->add('additionalAttribute1', 'addAttr1');
+        $image102->attributes->add('additionalAttribute2', 'addAttr2');
         $image102->links->add(new Link('self', 'https://image/102'));
 
         $image103 = new ResourceObject('image', '103');
         $image103->attributes->add('url', 'https://image/103.jpg');
+        $image103->attributes->add('additionalAttribute1', 'addAttr1');
+        $image103->attributes->add('additionalAttribute2', 'addAttr2');
         $image103->links->add(new Link('self', 'https://image/103'));
 
         $author->relationship('images')->resourceLinkage->add($image103);
@@ -150,7 +158,7 @@ class DocumentTest extends AbstractTestCase
     public function testImportingDataWithMeta() : void
     {
         $array = $this->arrayDocumentSuperDuperWithForcedList;
-        $array['Meta'] = [
+        $array['meta'] = [
            'metaOne' => 1,
            'metaTwo' => 2
         ];
@@ -197,7 +205,7 @@ class DocumentTest extends AbstractTestCase
                         'data' => [
                             'type' => 'user',
                             'id' => 'adslau79ulaksdu',
-                            'Meta' => [
+                            'meta' => [
                                 'isPrimaryAuthor' => true
                             ]
                         ]
@@ -207,14 +215,14 @@ class DocumentTest extends AbstractTestCase
                             [
                                 'type' => 'image',
                                 'id' => '26037dd7-481b-4110-97f3-a879a08d1e20',
-                                'Meta' => [
+                                'meta' => [
                                     'isCover' => true
                                 ]
                             ],
                             [
                                 'type' => 'image',
                                 'id' => '2563cc0c-3202-4554-be70-3c9850d5369e',
-                                'Meta' => [
+                                'meta' => [
                                     'isCover' => false
                                 ]
                             ]
@@ -234,7 +242,7 @@ class DocumentTest extends AbstractTestCase
                         'username' => 'carlo',
                         'url' => 'https://CarloNicora.com'
                     ],
-                    'Meta' => [
+                    'meta' => [
                         'hasJournals' => true,
                         'hasPhotos' => true
                     ],
@@ -267,5 +275,34 @@ class DocumentTest extends AbstractTestCase
 
         $document = new Document($array);
         $this->assertEquals($array, $document->prepare());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testPartialArrayImport() : void
+    {
+        $document = new Document($this->arrayDocumentSuperDuper);
+
+        $include = ['author', 'author.images'];
+
+        $this->assertEquals($this->arrayDocumentSuperDuperPartial, $document->prepare($include));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testPartialLimitedArrayImport() : void
+    {
+        $document = new Document($this->arrayDocumentSuperDuper);
+
+        $include = ['author', 'author.images'];
+        $fields = [
+            'article' => ['title'],
+            'user' => ['name'],
+            'image' => ['url']
+        ];
+
+        $this->assertEquals($this->arrayDocumentSuperDuperPartialLimited, $document->prepare($include, $fields));
     }
 }

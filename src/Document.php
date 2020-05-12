@@ -2,7 +2,6 @@
 namespace CarloNicora\JsonApi;
 
 use CarloNicora\JsonApi\Interfaces\ExportInterface;
-use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Interfaces\ImportInterface;
 use CarloNicora\JsonApi\Objects\error;
 use CarloNicora\JsonApi\Objects\Links;
@@ -12,7 +11,7 @@ use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
 use Exception;
 use JsonException;
 
-class Document implements ExportInterface, ExportPreparationInterface, ImportInterface
+class Document implements ExportInterface, ImportInterface
 {
     use ExportPreparationTrait;
 
@@ -66,20 +65,12 @@ class Document implements ExportInterface, ExportPreparationInterface, ImportInt
     }
 
     /**
-     *
-     */
-    private function buildIncluded() : void
-    {
-        foreach ($this->resources as $resource) {
-            $this->addIncluded($resource, true);
-        }
-    }
-
-    /**
      * @param ResourceObject $resource
+     * @param string $parentInclude
+     * @param array|null $includedResourceTypes
      * @param bool $isPrimaryData
      */
-    private function addIncluded(ResourceObject $resource, bool $isPrimaryData=false) : void
+    private function addIncluded(ResourceObject $resource, string $parentInclude='', array $includedResourceTypes=null, bool $isPrimaryData=false) : void
     {
         if (!$isPrimaryData) {
             $includedResourceFound = false;
@@ -97,9 +88,12 @@ class Document implements ExportInterface, ExportPreparationInterface, ImportInt
         }
 
         if (count($resource->relationships) > 0){
-            foreach ($resource->relationships as $relationship){
-                foreach ($relationship->resourceLinkage->resources as $childResource){
-                    $this->addIncluded($childResource);
+            foreach ($resource->relationships as $relationshipName=>$relationship){
+                $newParentInclude = $parentInclude === '' ? $relationshipName : $parentInclude.'.'.$relationshipName;
+                if ($includedResourceTypes === null || in_array($newParentInclude, $includedResourceTypes, true)) {
+                    foreach ($relationship->resourceLinkage->resources as $childResource) {
+                        $this->addIncluded($childResource, $newParentInclude, $includedResourceTypes);
+                    }
                 }
             }
         }
@@ -111,11 +105,15 @@ class Document implements ExportInterface, ExportPreparationInterface, ImportInt
     }
 
     /**
+     * @param array|null $includedResourceTypes
+     * @param array|null $requiredFields
      * @return array
      */
-    public function prepare(): array
+    public function prepare(?array $includedResourceTypes=null, ?array $requiredFields=null): array
     {
-        $this->buildIncluded();
+        foreach ($this->resources as $resource) {
+            $this->addIncluded($resource, '', $includedResourceTypes, true);
+        }
 
         $response = [];
 
@@ -129,9 +127,9 @@ class Document implements ExportInterface, ExportPreparationInterface, ImportInt
             $response['data'] = [];
             foreach ($this->resources as $resource){
                 if (!$this->forceResourceList && count($this->resources) === 1) {
-                    $response['data'] = $resource->prepare();
+                    $response['data'] = $resource->prepare($requiredFields[$resource->type] ?? null);
                 } else {
-                    $response['data'][] = $resource->prepare();
+                    $response['data'][] = $resource->prepare($requiredFields[$resource->type] ?? null);
                 }
             }
         }
@@ -147,7 +145,7 @@ class Document implements ExportInterface, ExportPreparationInterface, ImportInt
             $response['included'] = [];
 
             foreach ($this->included as $resource) {
-                $response['included'][] = $resource->prepare();
+                $response['included'][] = $resource->prepare($requiredFields[$resource->type] ?? null);
             }
         }
 
@@ -174,8 +172,8 @@ class Document implements ExportInterface, ExportPreparationInterface, ImportInt
             $included = $data['included'];
         }
 
-        if (array_key_exists('Meta', $data)) {
-            $this->meta->importArray($data['Meta']);
+        if (array_key_exists('meta', $data)) {
+            $this->meta->importArray($data['meta']);
         }
 
         if (array_key_exists('Links', $data)) {

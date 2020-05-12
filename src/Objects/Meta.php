@@ -48,9 +48,10 @@ class Meta implements ExportPreparationInterface, ImportInterface
     }
 
     /**
+     * @param array|null $requiredFields
      * @return array
      */
-    public function prepare(): array
+    public function prepare(?array $requiredFields=null): array
     {
         return $this->metaInformation;
     }

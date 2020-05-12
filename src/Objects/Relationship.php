@@ -30,9 +30,10 @@ class Relationship implements ExportPreparationInterface, ImportInterface
     }
 
     /**
+     * @param array|null $requiredFields
      * @return array
      */
-    public function prepare(): array
+    public function prepare(?array $requiredFields=null): array
     {
         $response = [];
 
@@ -51,8 +52,8 @@ class Relationship implements ExportPreparationInterface, ImportInterface
      */
     public function importArray(array $data, array $included=null): void
     {
-        if (array_key_exists('Meta', $data)) {
-            $this->meta->importArray($data['Meta']);
+        if (array_key_exists('meta', $data)) {
+            $this->meta->importArray($data['meta']);
         }
 
         if (array_key_exists('Links', $data)) {
@@ -63,17 +64,17 @@ class Relationship implements ExportPreparationInterface, ImportInterface
             if (array_key_exists('type', $data['data'])){
                 $objectArray = $this->getResourceFromIncludedArray($data['data']['type'], $data['data']['id'], $included);
                 $resourceIdentifierMeta = null;
-                if (array_key_exists('Meta', $data['data'])){
+                if (array_key_exists('meta', $data['data'])){
                     $resourceIdentifierMeta = new Meta();
-                    $resourceIdentifierMeta->importArray($data['data']['Meta']);
+                    $resourceIdentifierMeta->importArray($data['data']['meta']);
                 }
                 $this->resourceLinkage->add(new ResourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
             } else {
                 foreach ($data['data'] as $objectArray){
                     $resourceIdentifierMeta = null;
-                    if (array_key_exists('Meta', $objectArray)){
+                    if (array_key_exists('meta', $objectArray)){
                         $resourceIdentifierMeta = new Meta();
-                        $resourceIdentifierMeta->importArray($objectArray['Meta']);
+                        $resourceIdentifierMeta->importArray($objectArray['meta']);
                     }
                     $objectArray = $this->getResourceFromIncludedArray($objectArray['type'], $objectArray['id'], $included);
                     $this->resourceLinkage->add(new ResourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
