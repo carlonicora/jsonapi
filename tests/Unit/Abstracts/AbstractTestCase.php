@@ -1,5 +1,5 @@
 <?php
-namespace CarloNicora\JsonApi\tests\UnitS\Abstracts;
+namespace CarloNicora\JsonApi\tests\Unit\Abstracts;
 
 use CarloNicora\JsonApi\Document;
 use CarloNicora\JsonApi\Objects\Attributes;
@@ -12,8 +12,8 @@ use CarloNicora\JsonApi\Objects\ResourceLinkage;
 use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\JsonApi\Objects\ResourceIdentifier;
 use CarloNicora\JsonApi\Response;
-use CarloNicora\JsonApi\tests\UnitS\traits\arrayDeclarationTrait;
-use CarloNicora\JsonApi\tests\UnitS\traits\jsonDeclarationTrait;
+use CarloNicora\JsonApi\tests\Unit\traits\arrayDeclarationTrait;
+use CarloNicora\JsonApi\tests\Unit\traits\jsonDeclarationTrait;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;

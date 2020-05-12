@@ -1,9 +1,9 @@
 <?php
-namespace CarloNicora\JsonApi\tests\UnitS;
+namespace CarloNicora\JsonApi\tests\Unit;
 
 use CarloNicora\JsonApi\Document;
 use CarloNicora\JsonApi\Response;
-use CarloNicora\JsonApi\tests\UnitS\Abstracts\AbstractTestCase;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use JsonException;
 
 class ResponseTest extends AbstractTestCase

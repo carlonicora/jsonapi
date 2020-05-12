@@ -1,7 +1,7 @@
 <?php
-namespace CarloNicora\JsonApi\tests\UnitS\Objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
-use CarloNicora\JsonApi\tests\UnitS\Abstracts\AbstractTestCase;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 
 class LinkTest extends AbstractTestCase

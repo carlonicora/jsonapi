@@ -1,5 +1,5 @@
 <?php
-namespace CarloNicora\JsonApi\tests\UnitS\Traits;
+namespace CarloNicora\JsonApi\tests\Unit\Traits;
 
 trait ArrayDeclarationTrait
 {

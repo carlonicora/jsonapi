@@ -1,9 +1,9 @@
 <?php
-namespace CarloNicora\JsonApi\tests\UnitS\Objects;
+namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Objects\ResourceLinkage;
-use CarloNicora\JsonApi\tests\UnitS\Abstracts\AbstractTestCase;
+use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
 
 class ResourceLinkageTest extends AbstractTestCase
