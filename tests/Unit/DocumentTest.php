@@ -30,7 +30,8 @@ class DocumentTest extends AbstractTestCase
     public function testDocumentErrorExport() : void
     {
         $document = $this->generateDocumentEmpty();
-        $document->addError( new Error('500', 'Generic Error'));
+        $exception = new Exception('Generic Error', 500);
+        $document->addError( new Error($exception));
 
         $this->assertEquals(['errors' => [['status' => '500', 'detail' => 'Generic Error']]], $document->prepare());
     }

@@ -152,7 +152,7 @@ class AbstractTestCase extends TestCase
 
     protected function generateError() : Error
     {
-        return new Error('status', 'detail', 'id', 'code', 'title');
+        return new Error(null, 'status', 'detail', 'id', 'code', 'title');
     }
 
     /**

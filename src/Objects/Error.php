@@ -3,6 +3,7 @@ namespace CarloNicora\JsonApi\Objects;
 
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
+use Throwable;
 
 class Error implements ExportPreparationInterface
 {
@@ -33,17 +34,29 @@ class Error implements ExportPreparationInterface
     public Links $links;
 
     public function __construct(
+        ?Throwable $e=null,
         ?string $status=null,
         ?string $detail=null,
         ?string $id=null,
         ?string $code=null,
         ?string $title=null)
     {
-        $this->status = $status;
+        $this->status = null;
+        $this->detail = null;
+
+        if ($e !== null){
+            $this->status = (string)$e->getCode();
+            $this->detail = $e->getMessage();
+        }
+        if ($status !== null) {
+            $this->status = $status;
+        }
+        if ($detail !== null){
+            $this->detail = $detail;
+        }
         $this->id = $id;
-        $this->code = $code;
         $this->title = $title;
-        $this->detail = $detail;
+        $this->code = $code;
 
         $this->meta = new Meta();
         $this->links = new Links();
