@@ -26,8 +26,8 @@ class Document implements ImportInterface
     /** @var ResourceObject[]  */
     public array $included=[];
 
-    /** @var error[]  */
-    private array $errors = [];
+    /** @var Error[]  */
+    public array $errors = [];
 
     /** @var bool  */
     private bool $forceResourceList=false;
