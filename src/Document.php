@@ -32,6 +32,12 @@ class Document implements ImportInterface
     /** @var bool  */
     private bool $forceResourceList=false;
 
+    /** @var array|null  */
+    private ?array $includedResourceTypes=null;
+
+    /** @var array|null  */
+    private ?array $requiredFields=null;
+
     /**
      * Document constructor.
      * @param array|null $dataImport
@@ -45,6 +51,22 @@ class Document implements ImportInterface
         if ($dataImport !== null){
             $this->importArray($dataImport);
         }
+    }
+
+    /**
+     * @param array $includedResourceTypes
+     */
+    public function setIncludedResourceTypes(array $includedResourceTypes) : void
+    {
+        $this->includedResourceTypes = $includedResourceTypes;
+    }
+
+    /**
+     * @param array $requiredFields
+     */
+    public function setRequiredFields(array $requiredFields) : void
+    {
+        $this->requiredFields = $requiredFields;
     }
 
     /**
@@ -104,14 +126,12 @@ class Document implements ImportInterface
     }
 
     /**
-     * @param array|null $includedResourceTypes
-     * @param array|null $requiredFields
      * @return array
      */
-    public function prepare(?array $includedResourceTypes=null, ?array $requiredFields=null): array
+    public function prepare(): array
     {
         foreach ($this->resources as $resource) {
-            $this->addIncluded($resource, '', $includedResourceTypes, true);
+            $this->addIncluded($resource, '', $this->includedResourceTypes, true);
         }
 
         $response = [];
@@ -126,9 +146,9 @@ class Document implements ImportInterface
             $response['data'] = [];
             foreach ($this->resources as $resource){
                 if (!$this->forceResourceList && count($this->resources) === 1) {
-                    $response['data'] = $resource->prepare($requiredFields[$resource->type] ?? null);
+                    $response['data'] = $resource->prepare($this->requiredFields[$resource->type] ?? null);
                 } else {
-                    $response['data'][] = $resource->prepare($requiredFields[$resource->type] ?? null);
+                    $response['data'][] = $resource->prepare($this->requiredFields[$resource->type] ?? null);
                 }
             }
         }
@@ -144,7 +164,7 @@ class Document implements ImportInterface
             $response['included'] = [];
 
             foreach ($this->included as $resource) {
-                $response['included'][] = $resource->prepare($requiredFields[$resource->type] ?? null);
+                $response['included'][] = $resource->prepare($this->requiredFields[$resource->type] ?? null);
             }
         }
 
@@ -152,14 +172,12 @@ class Document implements ImportInterface
     }
 
     /**
-     * @param array|null $includedResourceTypes
-     * @param array|null $requiredFields
      * @return string
      * @throws JsonException
      */
-    public function export(?array $includedResourceTypes=null, ?array $requiredFields=null): string
+    public function export(): string
     {
-        return json_encode($this->prepare($includedResourceTypes, $requiredFields), JSON_THROW_ON_ERROR);
+        return json_encode($this->prepare(), JSON_THROW_ON_ERROR);
     }
 
     /**

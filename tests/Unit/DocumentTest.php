@@ -288,7 +288,9 @@ class DocumentTest extends AbstractTestCase
 
         $include = ['author', 'author.images'];
 
-        $this->assertEquals($this->arrayDocumentSuperDuperPartial, $document->prepare($include));
+        $document->setIncludedResourceTypes($include);
+
+        $this->assertEquals($this->arrayDocumentSuperDuperPartial, $document->prepare());
     }
 
     /**
@@ -305,6 +307,9 @@ class DocumentTest extends AbstractTestCase
             'image' => ['url']
         ];
 
-        $this->assertEquals($this->arrayDocumentSuperDuperPartialLimited, $document->prepare($include, $fields));
+        $document->setIncludedResourceTypes($include);
+        $document->setRequiredFields($fields);
+
+        $this->assertEquals($this->arrayDocumentSuperDuperPartialLimited, $document->prepare());
     }
 }
