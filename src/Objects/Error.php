@@ -3,7 +3,7 @@ namespace CarloNicora\JsonApi\Objects;
 
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
-use Throwable;
+use Exception;
 
 class Error implements ExportPreparationInterface
 {
@@ -34,7 +34,7 @@ class Error implements ExportPreparationInterface
     public Links $links;
 
     public function __construct(
-        ?Throwable $e=null,
+        ?Exception $e=null,
         ?string $status=null,
         ?string $detail=null,
         ?string $id=null,
@@ -101,5 +101,4 @@ class Error implements ExportPreparationInterface
 
         return $response;
     }
-
 }
