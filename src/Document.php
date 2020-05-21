@@ -2,7 +2,7 @@
 namespace CarloNicora\JsonApi;
 
 use CarloNicora\JsonApi\Interfaces\ImportInterface;
-use CarloNicora\JsonApi\Objects\error;
+use CarloNicora\JsonApi\Objects\Error;
 use CarloNicora\JsonApi\Objects\Links;
 use CarloNicora\JsonApi\Objects\Meta;
 use CarloNicora\JsonApi\Objects\ResourceObject;
@@ -78,9 +78,9 @@ class Document implements ImportInterface
     }
 
     /**
-     * @param error $error
+     * @param Error $error
      */
-    public function addError(error $error): void
+    public function addError(Error $error): void
     {
         $this->errors[] = $error;
     }
