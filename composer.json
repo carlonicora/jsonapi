@@ -1,7 +1,7 @@
 {
   "name": "carlonicora/jsonapi",
   "description": "PHP library for {json:api} implementation",
-  "version": "2.3.1-beta1",
+  "version": "2.3.1-beta2",
   "homepage": "https://carlonicora.com",
   "time": "2020-05-10",
   "license": "MIT",
@@ -12,8 +12,7 @@
       "name": "Carlo Nicora",
       "email": "carlo@carlonicora.com",
       "homepage": "http://carlonicora.com",
-      "role": "Developer"
-    }
+      "role": "Developer"}
   ],
   "autoload": {
     "psr-4": {
