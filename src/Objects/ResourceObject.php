@@ -10,8 +10,8 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
 {
     use ExportPreparationTrait;
 
-    /** @var attributes  */
-    public attributes $attributes;
+    /** @var Attributes  */
+    public Attributes $attributes;
 
     /** @var Links  */
     public Links $links;
@@ -19,7 +19,7 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
     /** @var Meta  */
     public Meta $meta;
 
-    /** @var array|relationship[] */
+    /** @var array|Relationship[] */
     public array $relationships=[];
 
     /**
@@ -33,7 +33,7 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
      */
     public function __construct(?string $type=null, ?string $id = null, ?array $dataImport=null, array $included=null, ?Meta $resourceIdentifierMeta=null)
     {
-        $this->attributes = new attributes();
+        $this->attributes = new Attributes();
         $this->links = new Links();
         $this->meta = new Meta();
         $this->resourceIdentifierMeta = new Meta();
