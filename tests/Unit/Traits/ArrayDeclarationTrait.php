@@ -58,7 +58,7 @@ trait ArrayDeclarationTrait
         'code' => 'code',
         'title' => 'title',
         'detail' => 'detail',
-        'Links' => [
+        'links' => [
             'self' => 'https://self'
         ]
     ];
@@ -92,7 +92,7 @@ trait ArrayDeclarationTrait
         'attributes' => [
             'name' => 'Carlo'
         ],
-        'Links' => [
+        'links' => [
             'self' => 'https://self'
         ]
     ];
@@ -108,7 +108,7 @@ trait ArrayDeclarationTrait
         'attributes' => [
             'name' => 'Carlo'
         ],
-        'Links' => [
+        'links' => [
             'self' => 'https://self',
             'related' => [
                 'href' => 'https://related',
@@ -155,7 +155,7 @@ trait ArrayDeclarationTrait
                 'additionalAttribute1' => 'addAttr1',
                 'additionalAttribute2' => 'addAttr2'
             ],
-            'Links' => [
+            'links' => [
                 'self' => 'https://article/1'
             ],
             'relationships' => [
@@ -188,7 +188,7 @@ trait ArrayDeclarationTrait
                     'additionalAttribute1' => 'addAttr1',
                     'additionalAttribute2' => 'addAttr2'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://user/10'
                 ],
                 'relationships' => [
@@ -208,7 +208,7 @@ trait ArrayDeclarationTrait
                     'additionalAttribute1' => 'addAttr1',
                     'additionalAttribute2' => 'addAttr2'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/103'
                 ]
             ],
@@ -220,7 +220,7 @@ trait ArrayDeclarationTrait
                     'additionalAttribute1' => 'addAttr1',
                     'additionalAttribute2' => 'addAttr2'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/101'
                 ]
             ],
@@ -232,7 +232,7 @@ trait ArrayDeclarationTrait
                     'additionalAttribute1' => 'addAttr1',
                     'additionalAttribute2' => 'addAttr2'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/102'
                 ]
             ],
@@ -248,7 +248,7 @@ trait ArrayDeclarationTrait
                 'additionalAttribute1' => 'addAttr1',
                 'additionalAttribute2' => 'addAttr2'
             ],
-            'Links' => [
+            'links' => [
                 'self' => 'https://article/1'
             ],
             'relationships' => [
@@ -281,7 +281,7 @@ trait ArrayDeclarationTrait
                     'additionalAttribute1' => 'addAttr1',
                     'additionalAttribute2' => 'addAttr2'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://user/10'
                 ],
                 'relationships' => [
@@ -301,7 +301,7 @@ trait ArrayDeclarationTrait
                     'additionalAttribute1' => 'addAttr1',
                     'additionalAttribute2' => 'addAttr2'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/103'
                 ]
             ]
@@ -315,7 +315,7 @@ trait ArrayDeclarationTrait
             'attributes' => [
                 'title' => 'title'
             ],
-            'Links' => [
+            'links' => [
                 'self' => 'https://article/1'
             ],
             'relationships' => [
@@ -346,7 +346,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'name' => 'Carlo'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://user/10'
                 ],
                 'relationships' => [
@@ -364,7 +364,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/103.jpg'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/103'
                 ]
             ]
@@ -380,7 +380,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'title' => 'title'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://article/1'
                 ],
                 'relationships' => [
@@ -412,7 +412,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'name' => 'Carlo'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://user/10'
                 ],
                 'relationships' => [
@@ -430,7 +430,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/103.jpg'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/103'
                 ]
             ],
@@ -440,7 +440,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/101.jpg'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/101'
                 ],
                 'relationships' => [
@@ -458,7 +458,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/102.jpg'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/102'
                 ]
             ],
@@ -473,12 +473,12 @@ trait ArrayDeclarationTrait
             'attributes' => [
                 'title' => 'title'
             ],
-            'Links' => [
+            'links' => [
                 'self' => 'https://article/1'
             ],
             'relationships' => [
                 'author' => [
-                    'Links' => [
+                    'links' => [
                         'self' => 'https://author/1'
                     ],
                     'meta' => [
@@ -511,7 +511,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'name' => 'Carlo'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://user/10'
                 ],
                 'relationships' => [
@@ -529,7 +529,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/103.jpg'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/103'
                 ]
             ],
@@ -539,7 +539,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/101.jpg'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/101'
                 ],
                 'relationships' => [
@@ -557,7 +557,7 @@ trait ArrayDeclarationTrait
                 'attributes' => [
                     'url' => 'https://image/102.jpg'
                 ],
-                'Links' => [
+                'links' => [
                     'self' => 'https://image/102'
                 ]
             ],

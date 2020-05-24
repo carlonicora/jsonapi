@@ -126,8 +126,8 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
             $this->meta->importArray($data['meta']);
         }
 
-        if (array_key_exists('Links', $data)) {
-            $this->links->importArray($data['Links']);
+        if (array_key_exists('links', $data)) {
+            $this->links->importArray($data['links']);
         }
 
         if (array_key_exists('relationships', $data)) {

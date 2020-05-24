@@ -25,7 +25,7 @@ trait ExportPreparationTrait
     private function prepareLinks(Links $links, array &$response) : void
     {
         if (0 !== $links->count()) {
-            $response['Links'] = $links->prepare();
+            $response['links'] = $links->prepare();
         }
     }
 }
