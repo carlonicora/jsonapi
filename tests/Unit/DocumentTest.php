@@ -93,6 +93,26 @@ class DocumentTest extends AbstractTestCase
         $this->assertEquals($this->arrayDocumentSuperDuper, $document->prepare());
     }
 
+    public function testAddResourceList() : void
+    {
+        $document = new Document();
+
+        $resourceList = [
+            new ResourceObject('type', '1'),
+            new ResourceObject('type', '2')
+        ];
+        $document->addResourceList($resourceList);
+
+        $expectedResult = [
+            'data' => [
+                ['type' => 'type', 'id' => '1', 'attributes' => []],
+                ['type' => 'type', 'id' => '2', 'attributes' => []]
+            ]
+        ];
+
+        $this->assertEquals($expectedResult, $document->prepare());
+    }
+
     /**
      * @throws Exception
      */

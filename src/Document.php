@@ -78,6 +78,16 @@ class Document implements ImportInterface
     }
 
     /**
+     * @param array|ResourceObject[] $resourceList
+     */
+    public function addResourceList(array $resourceList) : void
+    {
+        foreach ($resourceList as $resource) {
+            $this->addResource($resource);
+        }
+    }
+
+    /**
      * @param error $error
      */
     public function addError(error $error): void
