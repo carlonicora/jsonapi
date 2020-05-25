@@ -52,7 +52,7 @@ class Attributes implements ExportPreparationInterface, ImportInterface
         $response = [];
 
         foreach ($this->attributes as $attributeName => $attributeValue) {
-            if (in_array($attributeName, $requiredFields, true)){
+            if (in_array(strtolower($attributeName), $requiredFields, true)){
                 $response[$attributeName] = $attributeValue;
             }
         }

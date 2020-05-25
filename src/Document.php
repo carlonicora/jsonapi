@@ -58,7 +58,11 @@ class Document implements ImportInterface
      */
     public function setIncludedResourceTypes(array $includedResourceTypes) : void
     {
-        $this->includedResourceTypes = $includedResourceTypes;
+        $this->includedResourceTypes = [];
+
+        foreach ($includedResourceTypes as $includedResourceType) {
+            $this->includedResourceTypes[] = strtolower($includedResourceType);
+        }
     }
 
     /**
@@ -66,7 +70,15 @@ class Document implements ImportInterface
      */
     public function setRequiredFields(array $requiredFields) : void
     {
-        $this->requiredFields = $requiredFields;
+        $this->requiredFields = [];
+
+        foreach ($requiredFields as $requiredFieldKey => $requiredField) {
+            $this->requiredFields[strtolower($requiredFieldKey)] = [];
+
+            foreach ($requiredField as $value) {
+                $this->requiredFields[strtolower($requiredFieldKey)][] = strtolower($value);
+            }
+        }
     }
 
     /**
@@ -121,7 +133,7 @@ class Document implements ImportInterface
         if (count($resource->relationships) > 0){
             foreach ($resource->relationships as $relationshipName=>$relationship){
                 $newParentInclude = $parentInclude === '' ? $relationshipName : $parentInclude.'.'.$relationshipName;
-                if ($includedResourceTypes === null || in_array($newParentInclude, $includedResourceTypes, true)) {
+                if ($includedResourceTypes === null || in_array(strtolower($newParentInclude), $includedResourceTypes, true)) {
                     foreach ($relationship->resourceLinkage->resources as $childResource) {
                         $this->addIncluded($childResource, $newParentInclude, $includedResourceTypes);
                     }
@@ -156,9 +168,9 @@ class Document implements ImportInterface
             $response['data'] = [];
             foreach ($this->resources as $resource){
                 if (!$this->forceResourceList && count($this->resources) === 1) {
-                    $response['data'] = $resource->prepare($this->requiredFields[$resource->type] ?? null);
+                    $response['data'] = $resource->prepare($this->requiredFields[strtolower($resource->type)] ?? null);
                 } else {
-                    $response['data'][] = $resource->prepare($this->requiredFields[$resource->type] ?? null);
+                    $response['data'][] = $resource->prepare($this->requiredFields[strtolower($resource->type)] ?? null);
                 }
             }
         }
