@@ -105,8 +105,8 @@ class DocumentTest extends AbstractTestCase
 
         $expectedResult = [
             'data' => [
-                ['type' => 'type', 'id' => '1', 'attributes' => []],
-                ['type' => 'type', 'id' => '2', 'attributes' => []]
+                ['type' => 'type', 'id' => '1'],
+                ['type' => 'type', 'id' => '2']
             ]
         ];
 
