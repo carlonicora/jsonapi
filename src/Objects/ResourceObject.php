@@ -86,7 +86,9 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
             unset($response['meta']);
         }
 
-        $response['attributes'] = $this->attributes->prepare($requiredFields);
+        if (count($attributes = $this->attributes->prepare($requiredFields)) > 0){
+            $response['attributes'] = $attributes;
+        }
 
         $this->prepareMeta($this->meta, $response);
         $this->prepareLinks($this->links, $response);
