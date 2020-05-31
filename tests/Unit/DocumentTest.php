@@ -195,18 +195,6 @@ class DocumentTest extends AbstractTestCase
     /**
      * @throws Exception
      */
-    public function testMissingIncludedWhileImportingData() : void
-    {
-        $this->expectExceptionCode(1);
-        $array = $this->arrayDocumentSuperDuperWithForcedList;
-        $array['included'] = [];
-        $document = new Document($array);
-        $document->forceResourceList();
-    }
-
-    /**
-     * @throws Exception
-     */
     public function testArrayImport() : void
     {
         $array = [
