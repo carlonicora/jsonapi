@@ -62,13 +62,17 @@ class Relationship implements ExportPreparationInterface, ImportInterface
 
         if (array_key_exists('data', $data)){
             if (array_key_exists('type', $data['data'])){
-                $objectArray = $this->getResourceFromIncludedArray($data['data']['type'], $data['data']['id'], $included);
                 $resourceIdentifierMeta = null;
                 if (array_key_exists('meta', $data['data'])){
                     $resourceIdentifierMeta = new Meta();
                     $resourceIdentifierMeta->importArray($data['data']['meta']);
                 }
-                $this->resourceLinkage->add(new ResourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
+                $objectArray = $this->getResourceFromIncludedArray($data['data']['type'], $data['data']['id'], $included);
+                if ($objectArray === null){
+                    $this->resourceLinkage->add(new ResourceObject($data['data']['type'], $data['data']['id']));
+                } else {
+                    $this->resourceLinkage->add(new ResourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
+                }
             } else {
                 foreach ($data['data'] as $objectArray){
                     $resourceIdentifierMeta = null;
@@ -86,11 +90,11 @@ class Relationship implements ExportPreparationInterface, ImportInterface
     /**
      * @param string $type
      * @param string $id
-     * @param array $included
+     * @param array|null $included
      * @return array|null
      */
-    public function getResourceFromIncludedArray(string $type, string $id, array $included) : ?array {
-        foreach($included as $objectArray) {
+    public function getResourceFromIncludedArray(string $type, string $id, ?array $included=null) : ?array {
+        foreach($included ?? [] as $objectArray) {
             if ($objectArray['type'] === $type && $objectArray['id'] === $id){
                 return $objectArray;
             }
