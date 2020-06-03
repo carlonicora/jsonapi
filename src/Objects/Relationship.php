@@ -42,6 +42,10 @@ class Relationship implements ExportPreparationInterface, ImportInterface
 
         $response['data'] = $this->resourceLinkage->prepare();
 
+        if (count($response) > 1 && $response['data'] === []){
+            unset($response['data']);
+        }
+
         return $response;
     }
 
