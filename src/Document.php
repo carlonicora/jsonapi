@@ -196,6 +196,7 @@ class Document implements ImportInterface
     /**
      * @return string
      * @throws JsonException
+     * @noinspection PhpDocRedundantThrowsInspection
      */
     public function export(): string
     {
@@ -228,6 +229,12 @@ class Document implements ImportInterface
                 foreach ($data['data'] as $resourceArray){
                     $this->resources[] = new ResourceObject(null, null, $resourceArray, $included);
                 }
+            }
+        }
+
+        if (array_key_exists('errors', $data)) {
+            foreach ($data['errors'] as $error) {
+                $this->errors []= new Error(null, $error['status'] ?? null, $error['detail'] ?? null, $error['id'] ?? null, $error['code'] ?? null, $error['title'] ?? null);
             }
         }
     }
