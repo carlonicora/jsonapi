@@ -11,6 +11,9 @@ use JsonException;
 
 class DocumentTest extends AbstractTestCase
 {
+    /**
+     * @throws Exception
+     */
     public function testCheckDocumentMinimalRequirementsMeta() : void
     {
         $document = $this->generateDocumentEmpty();
@@ -20,6 +23,7 @@ class DocumentTest extends AbstractTestCase
 
     /**
      * @throws JsonException
+     * @throws Exception
      */
     public function testCheckDocumentMinimalExport() : void
     {
@@ -27,6 +31,9 @@ class DocumentTest extends AbstractTestCase
         $this->assertEquals($this->jsonDocumentMinimal, $document->export());
     }
 
+    /**
+     * @throws Exception
+     */
     public function testDocumentErrorExport() : void
     {
         $document = $this->generateDocumentEmpty();

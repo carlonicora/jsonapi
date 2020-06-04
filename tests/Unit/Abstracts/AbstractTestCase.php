@@ -95,6 +95,7 @@ class AbstractTestCase extends TestCase
 
     /**
      * @return Document
+     * @throws Exception
      */
     protected function generateDocumentEmpty() : Document
     {
