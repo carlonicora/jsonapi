@@ -44,6 +44,16 @@ class AttributesTest extends AbstractTestCase
         $this->attributes->add('name', 'Carlo');
     }
 
+    /**
+     * @throws Exception
+     */
+    public function testUpdatingAttribute() : void {
+        $this->attributes->add('name', 'Carlos');
+        $this->attributes->update('name', 'Carlo');
+
+        $this->assertEquals('Carlo', $this->attributes->get('name'));
+    }
+
     public function testEmptyAttributeException() : void
     {
         $exception = new AttributeException();

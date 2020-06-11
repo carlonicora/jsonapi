@@ -27,13 +27,22 @@ class Attributes implements ExportPreparationInterface, ImportInterface
 
     /**
      * @param string $name
+     * @param mixed $value
+     * @throws Exception
+     */
+    public function update(string $name, $value): void
+    {
+        $this->attributes[$name] = $value;
+    }
+
+    /**
+     * @param string $name
      * @return mixed
      * @throws Exception
      */
     public function get(string $name) {
         if (!array_key_exists($name, $this->attributes)){
             throw new AttributeException($name, AttributeException::ATTRIBUTE_NOT_FOUND);
-
         }
 
         return $this->attributes[$name];
