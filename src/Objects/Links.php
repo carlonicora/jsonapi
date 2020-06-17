@@ -25,6 +25,15 @@ class Links implements ExportPreparationInterface, ImportInterface
     }
 
     /**
+     * @param Link $link
+     * @throws Exception
+     */
+    public function update(Link $link): void
+    {
+        $this->links[$link->name] = $link;
+    }
+
+    /**
      * @param string $name
      * @return Link
      * @throws Exception
