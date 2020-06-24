@@ -48,6 +48,15 @@ class Links implements ExportPreparationInterface, ImportInterface
     }
 
     /**
+     * @param string $name
+     * @return bool
+     */
+    public function has(string $name): bool
+    {
+        return array_key_exists($name, $this->links);
+    }
+
+    /**
      * @return int
      */
     public function count() : int
