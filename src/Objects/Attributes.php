@@ -27,6 +27,15 @@ class Attributes implements ExportPreparationInterface, ImportInterface
 
     /**
      * @param string $name
+     * @return bool
+     */
+    public function has(string $name): bool
+    {
+        return array_key_exists($name, $this->attributes);
+    }
+
+    /**
+     * @param string $name
      * @param mixed $value
      * @throws Exception
      */
