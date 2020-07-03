@@ -73,7 +73,7 @@ class Relationship implements ExportPreparationInterface, ImportInterface
                 }
                 $objectArray = $this->getResourceFromIncludedArray($data['data']['type'], $data['data']['id'], $included);
                 if ($objectArray === null){
-                    $this->resourceLinkage->add(new ResourceObject($data['data']['type'], $data['data']['id']));
+                    $this->resourceLinkage->add(new ResourceObject($data['data']['type'], $data['data']['id'], $data['data']));
                 } else {
                     $this->resourceLinkage->add(new ResourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
                 }
@@ -85,7 +85,12 @@ class Relationship implements ExportPreparationInterface, ImportInterface
                         $resourceIdentifierMeta->importArray($objectArray['meta']);
                     }
                     $objectArray = $this->getResourceFromIncludedArray($objectArray['type'], $objectArray['id'], $included);
-                    $this->resourceLinkage->add(new ResourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
+                    if ($objectArray === null){
+                        $this->resourceLinkage->add(new ResourceObject($objectArray['type'], $objectArray['id'], $objectArray));
+                    } else {
+                        $this->resourceLinkage->add(new ResourceObject(null, null, $objectArray, $included, $resourceIdentifierMeta));
+                    }
+
                 }
             }
         }
