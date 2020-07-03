@@ -93,11 +93,15 @@ class Relationship implements ExportPreparationInterface, ImportInterface
 
     /**
      * @param string $type
-     * @param string $id
+     * @param string|null $id
      * @param array|null $included
      * @return array|null
      */
-    public function getResourceFromIncludedArray(string $type, string $id, ?array $included=null) : ?array {
+    public function getResourceFromIncludedArray(string $type, string $id = null, ?array $included=null) : ?array {
+        if ($id === null) {
+            return null;
+        }
+
         foreach($included ?? [] as $objectArray) {
             if ($objectArray['type'] === $type && $objectArray['id'] === $id){
                 return $objectArray;
