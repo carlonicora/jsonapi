@@ -1,7 +1,7 @@
 {
   "name": "carlonicora/jsonapi",
   "description": "PHP library for {json:api} implementation",
-  "version": "2.4.12-beta2",
+  "version": "2.4.12-beta3",
   "homepage": "https://carlonicora.com",
   "time": "2020-05-10",
   "license": "MIT",
