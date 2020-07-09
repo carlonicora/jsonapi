@@ -9,6 +9,7 @@ use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\JsonApi\Traits\ExportPreparationTrait;
 use Exception;
 use JsonException;
+use RuntimeException;
 
 class Document implements ImportInterface
 {
@@ -227,6 +228,9 @@ class Document implements ImportInterface
                 $this->resources[] = new ResourceObject(null, null, $data['data'], $included);
             } else {
                 foreach ($data['data'] as $resourceArray){
+                    if (false === is_array($resourceArray)) {
+                        throw new RuntimeException('Invalid jsonapi document format');
+                    }
                     $this->resources[] = new ResourceObject(null, null, $resourceArray, $included);
                 }
             }
