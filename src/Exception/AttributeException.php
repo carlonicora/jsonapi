@@ -19,7 +19,7 @@ class AttributeException extends AbstractJsonApiException
                 return 'Attribute already present.';
                 break;
             case self::ATTRIBUTE_NOT_FOUND:
-                return 'Attribute not foud.';
+                return 'Attribute not found.';
                 break;
             default:
                 return '';
