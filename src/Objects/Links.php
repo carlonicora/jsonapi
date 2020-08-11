@@ -25,6 +25,17 @@ class Links implements ExportPreparationInterface, ImportInterface
     }
 
     /**
+    * @param string $linkName
+    * @throws Exception
+    */
+    public function remove(string $linkName) : void
+    {
+        if (array_key_exists($linkName, $this->links)){
+            unset($this->links[$linkName]);
+        }
+    }
+
+    /**
      * @param Link $link
      * @throws Exception
      */

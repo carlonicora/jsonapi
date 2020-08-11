@@ -9,7 +9,16 @@ use Exception;
 class Meta implements ExportPreparationInterface, ImportInterface
 {
     /** @var array */
-    private array $metaInformation = [];
+    private array $metaInformation;
+
+    /**
+     * Meta constructor.
+     * @param array $metaInformation
+     */
+    public function __construct(array $metaInformation = [])
+    {
+        $this->metaInformation = $metaInformation;
+    }
 
     /**
      * @param string $name
