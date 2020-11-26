@@ -36,6 +36,16 @@ class Attributes implements ExportPreparationInterface, ImportInterface
 
     /**
      * @param string $name
+     */
+    public function remove(string $name): void
+    {
+        if (array_key_exists($name, $this->attributes)){
+            unset($this->attributes[$name]);
+        }
+    }
+
+    /**
+     * @param string $name
      * @param mixed $value
      * @throws Exception
      */
