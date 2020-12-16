@@ -23,12 +23,12 @@ class ResourceObjectTest extends AbstractTestCase
 
     public function testErrorInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(ExportPreparationInterface::class, $this->resource);
+        self::assertInstanceOf(ExportPreparationInterface::class, $this->resource);
     }
 
     public function testResourcePreparation() : void
     {
-        $this->assertEquals($this->arrayResource, $this->resource->prepare());
+        self::assertEquals($this->arrayResource, $this->resource->prepare());
     }
 
     /**
@@ -37,7 +37,7 @@ class ResourceObjectTest extends AbstractTestCase
     public function testFullResourcePreparation() : void
     {
         $resource = $this->generateCompleteResourceObject();
-        $this->assertEquals($this->arrayResourceFull, $resource->prepare());
+        self::assertEquals($this->arrayResourceFull, $resource->prepare());
     }
 
     /**
@@ -50,8 +50,8 @@ class ResourceObjectTest extends AbstractTestCase
 
         $resource->relationship('avatar')->resourceLinkage->add($imageResource);
 
-        $this->assertArrayHasKey('avatar', $resource->relationships);
-        $this->assertEquals('10', $resource->relationship('avatar')->resourceLinkage->resources[0]->id);
+        self::assertArrayHasKey('avatar', $resource->relationships);
+        self::assertEquals('10', $resource->relationship('avatar')->resourceLinkage->resources[0]->id);
     }
 
     /**
@@ -61,7 +61,7 @@ class ResourceObjectTest extends AbstractTestCase
     {
         $resource = new ResourceObject(null, null, $this->arrayResourceFullWithRelatedLink);
 
-        $this->assertEquals($this->arrayResourceFullWithRelatedLink, $resource->prepare());
+        self::assertEquals($this->arrayResourceFullWithRelatedLink, $resource->prepare());
     }
 
     /**

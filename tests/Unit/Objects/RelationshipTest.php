@@ -19,11 +19,11 @@ class RelationshipTest extends AbstractTestCase
 
     public function testResourceLinkageInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(ExportPreparationInterface::class, $this->relationship);
+        self::assertInstanceOf(ExportPreparationInterface::class, $this->relationship);
     }
 
     public function testEmptyResourceLinkagePreparation() : void
     {
-        $this->assertEquals(['data' => []], $this->relationship->prepare());
+        self::assertEquals(['data' => []], $this->relationship->prepare());
     }
 }

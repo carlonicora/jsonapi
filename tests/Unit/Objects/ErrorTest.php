@@ -20,12 +20,12 @@ class ErrorTest extends AbstractTestCase
 
     public function testErrorInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(ExportPreparationInterface::class, $this->error);
+        self::assertInstanceOf(ExportPreparationInterface::class, $this->error);
     }
 
     public function testErrorPreparation() : void
     {
-        $this->assertEquals($this->arrayError, $this->error->prepare());
+        self::assertEquals($this->arrayError, $this->error->prepare());
     }
 
     /**
@@ -34,7 +34,7 @@ class ErrorTest extends AbstractTestCase
     public function testErrorWithLinksPreparation() : void
     {
         $this->error->links->add($this->generateLink());
-        $this->assertEquals($this->arrayErrorWithLink, $this->error->prepare());
+        self::assertEquals($this->arrayErrorWithLink, $this->error->prepare());
     }
 
     /**
@@ -44,6 +44,6 @@ class ErrorTest extends AbstractTestCase
     {
         $this->error->meta->add('metaOne', 1);
         $this->error->meta->add('metaTwo', 2);
-        $this->assertEquals($this->arrayErrorWithMeta, $this->error->prepare());
+        self::assertEquals($this->arrayErrorWithMeta, $this->error->prepare());
     }
 }

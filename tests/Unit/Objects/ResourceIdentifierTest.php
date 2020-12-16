@@ -20,12 +20,12 @@ class ResourceIdentifierTest extends AbstractTestCase
 
     public function testErrorInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(ExportPreparationInterface::class, $this->resourceIdentifier);
+        self::assertInstanceOf(ExportPreparationInterface::class, $this->resourceIdentifier);
     }
 
     public function testResourceIdentifierPreparation() : void
     {
-        $this->assertEquals($this->arrayResourceIdentifier, $this->resourceIdentifier->prepare());
+        self::assertEquals($this->arrayResourceIdentifier, $this->resourceIdentifier->prepare());
     }
 
     /**
@@ -35,6 +35,6 @@ class ResourceIdentifierTest extends AbstractTestCase
     {
         $this->resourceIdentifier->resourceIdentifierMeta->add('metaOne', 1);
         $this->resourceIdentifier->resourceIdentifierMeta->add('metaTwo', 2);
-        $this->assertEquals($this->arrayResourceIdentifierWithMeta, $this->resourceIdentifier->prepare());
+        self::assertEquals($this->arrayResourceIdentifierWithMeta, $this->resourceIdentifier->prepare());
     }
 }

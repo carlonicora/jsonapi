@@ -10,7 +10,7 @@ class LinkTest extends AbstractTestCase
     public function testCreateLink() : void {
         $link = $this->generateLink();
 
-        $this->assertEquals('https://self', $link->prepare()['self']);
+        self::assertEquals('https://self', $link->prepare()['self']);
     }
 
     /**
@@ -19,13 +19,13 @@ class LinkTest extends AbstractTestCase
     public function testCreateLinkWithMeta() : void {
         $link = $this->generateLinkWithMeta();
 
-        $this->assertEquals('https://self', $link->prepare()['self']['href']);
-        $this->assertEquals(1, $link->prepare()['self']['meta']['metaOne']);
+        self::assertEquals('https://self', $link->prepare()['self']['href']);
+        self::assertEquals(1, $link->prepare()['self']['meta']['metaOne']);
     }
 
     public function testEmptyLinksException() : void
     {
         $exception = new LinksException();
-        $this->assertEquals('', $exception->getMessage());
+        self::assertEquals('', $exception->getMessage());
     }
 }

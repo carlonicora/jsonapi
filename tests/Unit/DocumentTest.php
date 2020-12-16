@@ -18,7 +18,7 @@ class DocumentTest extends AbstractTestCase
     {
         $document = $this->generateDocumentEmpty();
 
-        $this->assertEquals($this->arrayMetaOnly, $document->prepare());
+        self::assertEquals($this->arrayMetaOnly, $document->prepare());
     }
 
     /**
@@ -28,7 +28,7 @@ class DocumentTest extends AbstractTestCase
     public function testCheckDocumentMinimalExport() : void
     {
         $document = $this->generateDocumentEmpty();
-        $this->assertEquals($this->jsonDocumentMinimal, $document->export());
+        self::assertEquals($this->jsonDocumentMinimal, $document->export());
     }
 
     /**
@@ -40,7 +40,7 @@ class DocumentTest extends AbstractTestCase
         $exception = new Exception('Generic Error', 500);
         $document->addError( new Error($exception));
 
-        $this->assertEquals(['errors' => [['status' => '500', 'detail' => 'Generic Error']]], $document->prepare());
+        self::assertEquals(['errors' => [['status' => '500', 'detail' => 'Generic Error']]], $document->prepare());
     }
 
     /**
@@ -50,7 +50,7 @@ class DocumentTest extends AbstractTestCase
     {
         $document = $this->generateDocumentEmpty();
         $document->links->add(new Link('self', 'https://self'));
-        $this->assertEquals('https://self', $document->prepare()['links']['self']);
+        self::assertEquals('https://self', $document->prepare()['links']['self']);
     }
 
     /**
@@ -97,7 +97,7 @@ class DocumentTest extends AbstractTestCase
 
         $document->addResource($article);
 
-        $this->assertEquals($this->arrayDocumentSuperDuper, $document->prepare());
+        self::assertEquals($this->arrayDocumentSuperDuper, $document->prepare());
     }
 
     public function testAddResourceList() : void
@@ -117,7 +117,7 @@ class DocumentTest extends AbstractTestCase
             ]
         ];
 
-        $this->assertEquals($expectedResult, $document->prepare());
+        self::assertEquals($expectedResult, $document->prepare());
     }
 
     /**
@@ -156,7 +156,7 @@ class DocumentTest extends AbstractTestCase
 
         $document->addResource($article);
 
-        $this->assertEquals($this->arrayDocumentSuperDuperWithForcedList, $document->prepare());
+        self::assertEquals($this->arrayDocumentSuperDuperWithForcedList, $document->prepare());
     }
 
     /**
@@ -168,7 +168,7 @@ class DocumentTest extends AbstractTestCase
 
         $document->forceResourceList();
 
-        $this->assertEquals($this->arrayDocumentSuperDuperWithForcedList, $document->prepare());
+        self::assertEquals($this->arrayDocumentSuperDuperWithForcedList, $document->prepare());
     }
 
     /**
@@ -178,7 +178,7 @@ class DocumentTest extends AbstractTestCase
     {
         $document = new Document($this->arrayDocumentSuperDuperWithForcedListSingleEntity);
 
-        $this->assertEquals($this->arrayDocumentSuperDuperWithForcedListSingleEntity, $document->prepare());
+        self::assertEquals($this->arrayDocumentSuperDuperWithForcedListSingleEntity, $document->prepare());
     }
 
     /**
@@ -196,7 +196,7 @@ class DocumentTest extends AbstractTestCase
 
         $document->forceResourceList();
 
-        $this->assertEquals($array, $document->prepare());
+        self::assertEquals($array, $document->prepare());
     }
 
     /**
@@ -291,7 +291,7 @@ class DocumentTest extends AbstractTestCase
         ];
 
         $document = new Document($array);
-        $this->assertEquals($array, $document->prepare());
+        self::assertEquals($array, $document->prepare());
     }
 
     /**
@@ -305,7 +305,7 @@ class DocumentTest extends AbstractTestCase
 
         $document->setIncludedResourceTypes($include);
 
-        $this->assertEquals($this->arrayDocumentSuperDuperPartial, $document->prepare());
+        self::assertEquals($this->arrayDocumentSuperDuperPartial, $document->prepare());
     }
 
     /**
@@ -325,6 +325,6 @@ class DocumentTest extends AbstractTestCase
         $document->setIncludedResourceTypes($include);
         $document->setRequiredFields($fields);
 
-        $this->assertEquals($this->arrayDocumentSuperDuperPartialLimited, $document->prepare());
+        self::assertEquals($this->arrayDocumentSuperDuperPartialLimited, $document->prepare());
     }
 }

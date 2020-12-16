@@ -24,7 +24,7 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
 
     /**
      * ResourceObject constructor.
-     * @param string $type
+     * @param string|null $type
      * @param string|null $id
      * @param array|null $dataImport
      * @param array|null $included

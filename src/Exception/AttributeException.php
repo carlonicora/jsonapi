@@ -17,13 +17,10 @@ class AttributeException extends AbstractJsonApiException
         switch ($code) {
             case self::DUPLICATED_ATTRIBUTE:
                 return 'Attribute already present.';
-                break;
             case self::ATTRIBUTE_NOT_FOUND:
                 return 'Attribute not found.';
-                break;
             default:
                 return '';
-                break;
         }
     }
 }

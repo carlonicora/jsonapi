@@ -21,16 +21,16 @@ class MetaTest extends AbstractTestCase
 
     public function testMetaInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(ExportPreparationInterface::class, $this->meta);
+        self::assertInstanceOf(ExportPreparationInterface::class, $this->meta);
     }
 
     public function testAddingValidMeta() : void
     {
         try {
             $this->meta->add('metaOne', 1);
-            $this->assertEquals(1, $this->meta->get('metaOne'));
+            self::assertEquals(1, $this->meta->get('metaOne'));
         } catch (Exception $e) {
-            $this->fail();
+            self::fail();
         }
     }
 
@@ -56,6 +56,6 @@ class MetaTest extends AbstractTestCase
     public function testEmptyLinksException() : void
     {
         $exception = new MetaException();
-        $this->assertEquals('', $exception->getMessage());
+        self::assertEquals('', $exception->getMessage());
     }
 }

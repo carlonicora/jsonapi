@@ -9,7 +9,7 @@ class Error implements ExportPreparationInterface
 {
     use ExportPreparationTrait;
 
-    /** @var string  */
+    /** @var string|null  */
     public ?string $status;
 
     /** @var string|null  */

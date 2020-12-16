@@ -20,12 +20,12 @@ class ResourceLinkageTest extends AbstractTestCase
 
     public function testResourceLinkageInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(ExportPreparationInterface::class, $this->resourceLinkage);
+        self::assertInstanceOf(ExportPreparationInterface::class, $this->resourceLinkage);
     }
 
     public function testEmptyResourceLinkagePreparation() : void
     {
-        $this->assertEquals([], $this->resourceLinkage->prepare());
+        self::assertEquals([], $this->resourceLinkage->prepare());
     }
 
     public function testAddResource() : void
@@ -33,7 +33,7 @@ class ResourceLinkageTest extends AbstractTestCase
         $resource = $this->generateResourceObject();
         $this->resourceLinkage->add($resource);
 
-        $this->assertCount(1, $this->resourceLinkage->resources);
+        self::assertCount(1, $this->resourceLinkage->resources);
     }
 
     /**
@@ -44,6 +44,6 @@ class ResourceLinkageTest extends AbstractTestCase
         $resource = $this->generateResourceObjectWithAttributes();
         $this->resourceLinkage->add($resource);
 
-        $this->assertEquals($this->arrayLinkageSingleResource, $this->resourceLinkage->prepare());
+        self::assertEquals($this->arrayLinkageSingleResource, $this->resourceLinkage->prepare());
     }
 }

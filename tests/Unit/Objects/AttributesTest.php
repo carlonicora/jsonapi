@@ -21,16 +21,16 @@ class AttributesTest extends AbstractTestCase
 
     public function testMetaInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(ExportPreparationInterface::class, $this->attributes);
+        self::assertInstanceOf(ExportPreparationInterface::class, $this->attributes);
     }
 
     public function testAddingValidAttribute() : void
     {
         try {
             $this->attributes->add('name', 'Carlo');
-            $this->assertEquals('Carlo', $this->attributes->get('name'));
+            self::assertEquals('Carlo', $this->attributes->get('name'));
         } catch (Exception $e) {
-            $this->fail();
+            self::fail();
         }
     }
 
@@ -51,13 +51,13 @@ class AttributesTest extends AbstractTestCase
         $this->attributes->add('name', 'Carlos');
         $this->attributes->update('name', 'Carlo');
 
-        $this->assertEquals('Carlo', $this->attributes->get('name'));
+        self::assertEquals('Carlo', $this->attributes->get('name'));
     }
 
     public function testEmptyAttributeException() : void
     {
         $exception = new AttributeException();
-        $this->assertEquals('', $exception->getMessage());
+        self::assertEquals('', $exception->getMessage());
     }
 
     /**
@@ -76,6 +76,6 @@ class AttributesTest extends AbstractTestCase
     {
         $this->attributes->add('name', 'Carlo');
 
-        $this->assertEquals($this->arrayAttributesName, $this->attributes->prepare());
+        self::assertEquals($this->arrayAttributesName, $this->attributes->prepare());
     }
 }

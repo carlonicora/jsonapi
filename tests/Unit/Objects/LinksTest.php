@@ -21,7 +21,7 @@ class LinksTest extends AbstractTestCase
 
     public function testLinksInstanceOfExportPreparationInterface() : void
     {
-        $this->assertInstanceOf(ExportPreparationInterface::class, $this->links);
+        self::assertInstanceOf(ExportPreparationInterface::class, $this->links);
     }
 
     /**
@@ -30,7 +30,7 @@ class LinksTest extends AbstractTestCase
     public function testAddingValidLink() : void
     {
         $this->links->add($this->generateLink());
-        $this->assertEquals('https://self', $this->links->get('self')->href);
+        self::assertEquals('https://self', $this->links->get('self')->href);
     }
 
     /**
@@ -59,6 +59,6 @@ class LinksTest extends AbstractTestCase
         $this->links->add($this->generateLinkWithMeta());
         $this->links->add($this->generateRelatedLink());
 
-        $this->assertEquals($this->arrayLinks, $this->links->prepare());
+        self::assertEquals($this->arrayLinks, $this->links->prepare());
     }
 }

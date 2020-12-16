@@ -17,13 +17,10 @@ class MetaException extends AbstractJsonApiException
         switch ($code) {
             case self::DUPLICATED_META:
                 return 'meta already present.';
-                break;
             case self::META_NOT_FOUND:
                 return 'meta not foud.';
-                break;
             default:
                 return '';
-                break;
         }
     }
 }

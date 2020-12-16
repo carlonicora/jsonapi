@@ -17,13 +17,10 @@ class LinksException extends AbstractJsonApiException
         switch ($code) {
             case self::DUPLICATED_LINK:
                 return 'Link already present.';
-                break;
             case self::LINK_NOT_FOUND:
                 return 'Link not foud.';
-                break;
             default:
                 return '';
-                break;
         }
     }
 }

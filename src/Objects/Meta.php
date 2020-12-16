@@ -76,4 +76,23 @@ class Meta implements ExportPreparationInterface, ImportInterface
             $this->add($metaKey, $meta);
         }
     }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function has(string $name): bool
+    {
+        return array_key_exists($name, $this->metaInformation);
+    }
+
+    /**
+     * @param string $name
+     */
+    public function remove(string $name): void
+    {
+        if (array_key_exists($name, $this->metaInformation)){
+            unset($this->metaInformation[$name]);
+        }
+    }
 }
