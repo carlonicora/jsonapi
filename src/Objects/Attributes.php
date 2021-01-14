@@ -59,12 +59,21 @@ class Attributes implements ExportPreparationInterface, ImportInterface
      * @return mixed
      * @throws Exception
      */
-    public function get(string $name) {
+    public function get(string $name)
+    {
         if (!array_key_exists($name, $this->attributes)){
             throw new AttributeException($name, AttributeException::ATTRIBUTE_NOT_FOUND);
         }
 
         return $this->attributes[$name];
+    }
+
+    /**
+     * @return int
+     */
+    public function count(): int
+    {
+        return count($this->attributes);
     }
 
     /**
