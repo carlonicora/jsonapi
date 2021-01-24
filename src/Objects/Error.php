@@ -43,7 +43,7 @@ class Error implements ExportPreparationInterface
     ];
 
     public function __construct(
-        ?Exception $e=null,
+        Exception|Error|null  $e=null,
         ?string $httpStatusCode=null,
         ?string $detail=null,
         ?string $id=null,
