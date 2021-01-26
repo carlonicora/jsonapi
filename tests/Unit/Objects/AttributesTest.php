@@ -29,7 +29,7 @@ class AttributesTest extends AbstractTestCase
         try {
             $this->attributes->add('name', 'Carlo');
             self::assertEquals('Carlo', $this->attributes->get('name'));
-        } catch (Exception $e) {
+        } catch (Exception) {
             self::fail();
         }
     }

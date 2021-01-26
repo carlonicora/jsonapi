@@ -171,7 +171,7 @@ class AbstractTestCase extends TestCase
             $method = $reflection->getMethod($methodName);
             $method->setAccessible(true);
             return $method->invokeArgs($object, $parameters);
-        } catch (ReflectionException $e) {
+        } catch (ReflectionException) {
             return null;
         }
     }

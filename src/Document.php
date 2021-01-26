@@ -55,6 +55,14 @@ class Document implements ImportInterface
     }
 
     /**
+     * @return string
+     */
+    public function getContentType(): string
+    {
+        return 'application/vnd.api+json';
+    }
+
+    /**
      * @param array $includedResourceTypes
      */
     public function setIncludedResourceTypes(array $includedResourceTypes) : void

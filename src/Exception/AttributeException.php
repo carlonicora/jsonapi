@@ -14,13 +14,10 @@ class AttributeException extends AbstractJsonApiException
      */
     public function returnMessage(int $code): string
     {
-        switch ($code) {
-            case self::DUPLICATED_ATTRIBUTE:
-                return 'Attribute already present.';
-            case self::ATTRIBUTE_NOT_FOUND:
-                return 'Attribute not found.';
-            default:
-                return '';
-        }
+        return match ($code) {
+            self::DUPLICATED_ATTRIBUTE => 'Attribute already present.',
+            self::ATTRIBUTE_NOT_FOUND => 'Attribute not found.',
+            default => '',
+        };
     }
 }

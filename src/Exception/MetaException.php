@@ -14,13 +14,10 @@ class MetaException extends AbstractJsonApiException
      */
     public function returnMessage(int $code): string
     {
-        switch ($code) {
-            case self::DUPLICATED_META:
-                return 'meta already present.';
-            case self::META_NOT_FOUND:
-                return 'meta not foud.';
-            default:
-                return '';
-        }
+        return match ($code) {
+            self::DUPLICATED_META => 'meta already present.',
+            self::META_NOT_FOUND => 'meta not foud.',
+            default => '',
+        };
     }
 }

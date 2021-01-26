@@ -25,7 +25,7 @@ class Meta implements ExportPreparationInterface, ImportInterface
      * @param mixed $value
      * @throws Exception
      */
-    public function add(string $name, $value): void
+    public function add(string $name, mixed $value): void
     {
         if (array_key_exists($name, $this->metaInformation)){
             throw new MetaException($name, MetaException::DUPLICATED_META);
@@ -39,7 +39,8 @@ class Meta implements ExportPreparationInterface, ImportInterface
      * @return mixed
      * @throws Exception
      */
-    public function get(string $name) {
+    public function get(string $name):mixed
+    {
         if (!array_key_exists($name, $this->metaInformation)){
             throw new MetaException($name, MetaException::META_NOT_FOUND);
 

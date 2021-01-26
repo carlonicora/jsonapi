@@ -29,7 +29,7 @@ class MetaTest extends AbstractTestCase
         try {
             $this->meta->add('metaOne', 1);
             self::assertEquals(1, $this->meta->get('metaOne'));
-        } catch (Exception $e) {
+        } catch (Exception) {
             self::fail();
         }
     }
