@@ -563,4 +563,19 @@ trait ArrayDeclarationTrait
             ],
         ]
     ];
+
+    /**
+     * @var array
+     */
+    protected array $errors = [
+        'errors' => [
+            [
+                'status' => '500',
+                'detail' => 'detail',
+                'id' => '1',
+                'code' => '2',
+                'title' => 'title'
+            ]
+        ]
+    ];
 }

@@ -58,4 +58,23 @@ class MetaTest extends AbstractTestCase
         $exception = new MetaException();
         self::assertEquals('', $exception->getMessage());
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testHas() : void
+    {
+        $this->meta->add('one', 'one');
+        self::assertTrue($this->meta->has('one'));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testRemove() : void
+    {
+        $this->meta->add('one', 'one');
+        $this->meta->remove('one');
+        self::assertFalse($this->meta->has('one'));
+    }
 }

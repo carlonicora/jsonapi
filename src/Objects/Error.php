@@ -109,12 +109,6 @@ class Error implements ExportPreparationInterface
             $response['detail'] = $this->detail;
         }
 
-        /*
-        if ($this->source !== null) {
-            $response['source'] = $this->source;
-        }
-        */
-
         $this->prepareMeta($this->meta, $response);
         $this->prepareLinks($this->links, $response);
 

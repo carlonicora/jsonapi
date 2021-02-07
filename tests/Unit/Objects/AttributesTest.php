@@ -78,4 +78,36 @@ class AttributesTest extends AbstractTestCase
 
         self::assertEquals($this->arrayAttributesName, $this->attributes->prepare());
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testAttributeCount() : void
+    {
+        $this->attributes->add('name', 'Carlo');
+        $this->attributes->add('anotherName', 'Carlo');
+
+        self::assertEquals(2, $this->attributes->count());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testAttributeHas() : void
+    {
+        $this->attributes->add('name', 'Carlo');
+
+        self::assertTrue($this->attributes->has('name'));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testAttributeRemove() : void
+    {
+        $this->attributes->add('name', 'Carlo');
+        $this->attributes->remove('name');
+
+        self::assertFalse($this->attributes->has('name'));
+    }
 }

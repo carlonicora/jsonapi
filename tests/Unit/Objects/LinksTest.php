@@ -3,6 +3,7 @@ namespace CarloNicora\JsonApi\tests\Unit\Objects;
 
 use CarloNicora\JsonApi\Exception\LinksException;
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
+use CarloNicora\JsonApi\Objects\Link;
 use CarloNicora\JsonApi\Objects\Links;
 use CarloNicora\JsonApi\tests\Unit\Abstracts\AbstractTestCase;
 use Exception;
@@ -60,5 +61,52 @@ class LinksTest extends AbstractTestCase
         $this->links->add($this->generateRelatedLink());
 
         self::assertEquals($this->arrayLinks, $this->links->prepare());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testHas() : void {
+        $this->links->add(
+            new Link(
+                'one',
+                'one'
+            )
+        );
+        self::assertTrue($this->links->has('one'));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testRemove() : void {
+        $this->links->add(
+            new Link(
+                'one',
+                'one'
+            )
+        );
+        $this->links->remove('one');
+        self::assertFalse($this->links->has('one'));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testUpdate() : void {
+        $this->links->add(
+            new Link(
+                'one',
+                'one'
+            )
+        );
+
+        $this->links->update(
+            new Link(
+                'one',
+                'two'
+            )
+        );
+        self::assertEquals('two', $this->links->get('one')->href);
     }
 }

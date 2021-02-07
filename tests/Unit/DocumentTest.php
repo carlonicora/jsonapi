@@ -327,4 +327,39 @@ class DocumentTest extends AbstractTestCase
 
         self::assertEquals($this->arrayDocumentSuperDuperPartialLimited, $document->prepare());
     }
+
+    /**
+     *
+     */
+    public function testGetContentType(): void
+    {
+        $document = new Document();
+        self::assertEquals('application/vnd.api+json', $document->getContentType());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testImportingErrorData() : void
+    {
+        $document = new Document();
+        $document->importArray($this->errors);
+
+        self::assertEquals($this->errors, $document->prepare());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testInvalidData(): void
+    {
+        $document = new Document();
+
+        $this->expectExceptionMessage('Invalid jsonapi document format');
+        $document->importArray([
+            'data' => [
+                1
+            ]
+        ]);
+    }
 }
