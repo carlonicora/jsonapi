@@ -8,6 +8,9 @@ class ResourceLinkage implements ExportPreparationInterface
     /** @var ResourceObject[] */
     public array $resources = [];
 
+    /** @var bool */
+    protected bool $forceResourceList = false;
+
     public function add(ResourceObject $resource) : void
     {
         $this->resources[] = $resource;
@@ -22,7 +25,7 @@ class ResourceLinkage implements ExportPreparationInterface
         $response = [];
 
         foreach ($this->resources as $resource) {
-            if (count($this->resources) === 1) {
+            if (false === $this->forceResourceList && count($this->resources) === 1) {
                 $response = $resource->prepareIdentifier();
             } else {
                 $response[] = $resource->prepareIdentifier();
@@ -30,5 +33,13 @@ class ResourceLinkage implements ExportPreparationInterface
         }
 
         return $response;
+    }
+
+    /**
+     * @param bool $forceResourceList
+     */
+    public function forceResourceList(bool $forceResourceList): void
+    {
+        $this->forceResourceList = $forceResourceList;
     }
 }
