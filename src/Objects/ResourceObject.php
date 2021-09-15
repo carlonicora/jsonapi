@@ -134,7 +134,10 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
 
         if (array_key_exists('relationships', $data)) {
             foreach ($data['relationships'] as $relationshipKey=>$relationship){
-                if (array_key_exists('type', $relationship['data'])){
+                if (empty($relationship['data'])) {
+                    // A relationship can set only a link without data
+                    $this->relationship($relationshipKey)->importArray($relationship, $included);
+                } elseif (array_key_exists('type', $relationship['data'])) {
                     $this->relationship($relationshipKey)->importArray($relationship, $included);
                 } else {
                     foreach ($relationship['data'] as $singleData){
