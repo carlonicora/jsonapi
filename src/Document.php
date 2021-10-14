@@ -103,6 +103,8 @@ class Document implements ImportInterface
      */
     public function addResourceList(array $resourceList) : void
     {
+        $this->forceResourceList = true;
+
         foreach ($resourceList as $resource) {
             $this->addResource($resource);
         }
