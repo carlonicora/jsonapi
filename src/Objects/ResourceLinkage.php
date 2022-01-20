@@ -11,9 +11,32 @@ class ResourceLinkage implements ExportPreparationInterface
     /** @var bool */
     protected bool $forceResourceList = false;
 
+    /**
+     * @param ResourceObject $resource
+     * @return void
+     * @deprecated Use addResource as standard naming convention
+     */
     public function add(ResourceObject $resource) : void
     {
+        $this->addResource($resource);
+    }
+
+    /**
+     * @param ResourceObject $resource
+     * @return void
+     */
+    public function addResource(ResourceObject $resource) : void
+    {
         $this->resources[] = $resource;
+    }
+
+    /**
+     * @param array|ResourceObject[] $resourceList
+     */
+    public function addResourceList(array $resourceList) : void
+    {
+        $this->forceResourceList = true;
+        $this->resources = array_merge($this->resources, $resourceList);
     }
 
     /**
