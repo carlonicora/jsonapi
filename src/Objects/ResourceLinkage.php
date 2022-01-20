@@ -25,7 +25,7 @@ class ResourceLinkage implements ExportPreparationInterface
         $response = [];
 
         foreach ($this->resources as $resource) {
-            if (false === $this->forceResourceList && count($this->resources) === 1) {
+            if (!$this->forceResourceList && count($this->resources) === 1) {
                 $response = $resource->prepareIdentifier();
             } else {
                 $response[] = $resource->prepareIdentifier();

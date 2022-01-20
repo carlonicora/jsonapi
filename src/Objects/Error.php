@@ -82,6 +82,24 @@ class Error implements ExportPreparationInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getDetail(
+    ): ?string
+    {
+        return $this->detail;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCode(
+    ): ?string
+    {
+        return $this->code;
+    }
+
+    /**
      * @param array|null $requiredFields
      * @return array
      */

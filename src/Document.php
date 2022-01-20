@@ -238,7 +238,7 @@ class Document implements ImportInterface
                 $this->resources[] = new ResourceObject(null, null, $data['data'], $included);
             } else {
                 foreach ($data['data'] as $resourceArray){
-                    if (false === is_array($resourceArray)) {
+                    if (!is_array($resourceArray)) {
                         throw new RuntimeException('Invalid jsonapi document format');
                     }
                     $this->resources[] = new ResourceObject(null, null, $resourceArray, $included);
