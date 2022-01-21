@@ -111,6 +111,23 @@ class Document implements ImportInterface
     }
 
     /**
+     * @return ResourceObject
+     */
+    public function getSingleResource(
+    ): ResourceObject
+    {
+        if (count($this->resources) === 0){
+            throw new RuntimeException('The document does not contain any resource', 500);
+        }
+
+        if (count($this->resources) > 1){
+            throw new RuntimeException('The document does not contain multiple resources', 500);
+        }
+
+        return $this->resources[0];
+    }
+
+    /**
      * @param Error $error
      */
     public function addError(Error $error): void
