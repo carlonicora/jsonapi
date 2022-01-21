@@ -1,6 +1,7 @@
 <?php
 namespace CarloNicora\JsonApi\Objects;
 
+use CarloNicora\JsonApi\Document;
 use CarloNicora\JsonApi\Interfaces\ImportInterface;
 use Exception;
 use RuntimeException;
@@ -48,6 +49,17 @@ class ResourceObject extends ResourceIdentifier implements ImportInterface
         if ($resourceIdentifierMeta !== null){
             $this->resourceIdentifierMeta = $resourceIdentifierMeta;
         }
+    }
+
+    /**
+     * @return Document
+     */
+    public function generateDocumentFromResource(
+    ): Document
+    {
+        $response = new Document();
+        $response->addResource($this);
+        return $response;
     }
 
     /**
