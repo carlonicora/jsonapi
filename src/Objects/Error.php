@@ -100,6 +100,14 @@ class Error implements ExportPreparationInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
      * @param array|null $requiredFields
      * @return array
      */
