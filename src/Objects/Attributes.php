@@ -1,6 +1,7 @@
 <?php
 namespace CarloNicora\JsonApi\Objects;
 
+use BackedEnum;
 use CarloNicora\JsonApi\Exception\AttributeException;
 use CarloNicora\JsonApi\Interfaces\ExportPreparationInterface;
 use CarloNicora\JsonApi\Interfaces\ImportInterface;
@@ -22,7 +23,7 @@ class Attributes implements ExportPreparationInterface, ImportInterface
             throw new AttributeException($name, AttributeException::DUPLICATED_ATTRIBUTE);
         }
 
-        $this->attributes[$name] = $value;
+        $this->attributes[$name] = ($value instanceof BackedEnum) ? $value->value : $value;
     }
 
     /**
@@ -51,7 +52,7 @@ class Attributes implements ExportPreparationInterface, ImportInterface
      */
     public function update(string $name, mixed $value): void
     {
-        $this->attributes[$name] = $value;
+        $this->attributes[$name] = ($value instanceof BackedEnum) ? $value->value : $value;
     }
 
     /**
