@@ -25,9 +25,9 @@ class Links implements ExportPreparationInterface, ImportInterface
     }
 
     /**
-    * @param string $linkName
-    * @throws Exception
-    */
+     * @param string $linkName
+     * @throws Exception
+     */
     public function remove(string $linkName) : void
     {
         if (array_key_exists($linkName, $this->links)){
@@ -109,5 +109,14 @@ class Links implements ExportPreparationInterface, ImportInterface
 
             $this->add($link);
         }
+    }
+
+    /**
+     * @return Link[]
+     */
+    public function getLinks(
+    ): array
+    {
+        return $this->links;
     }
 }
